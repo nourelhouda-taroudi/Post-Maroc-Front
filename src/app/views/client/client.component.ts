@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { ClientService } from 'src/app/core/_services/client/client.service';
 import { Client } from 'src/app/core/_services/_models/client.model';
 
@@ -8,28 +10,35 @@ import { Client } from 'src/app/core/_services/_models/client.model';
   styleUrls: ['./client.component.css']
 })
 export class ClientComponent implements OnInit {
-
+  clientForm = new FormGroup({
+    CIN_Number : new FormControl(null,[Validators.required]),
+    firstName: new FormControl(null,[Validators.required]),
+    lastName: new FormControl(null, [Validators.required]),
+    email : new FormControl(null,[Validators.required]),
+    phone: new FormControl(null,[Validators.required]),
+    age: new FormControl(null,[Validators.required]),
+    salary: new FormControl(null,[Validators.required]),
+    address: new FormControl(null,[Validators.required]),
+    job: new FormControl(null,[Validators.required]),
+    accountBalance: new FormControl(null,[Validators.required])
+  });
   constructor(
-    private clientService:ClientService
+    private clientService:ClientService,
+    private router:Router
   ) { }
 
   ngOnInit(): void {
-    //this.clientService.getAccountBalance();
-    const client:Client = {
-      CIN_Number:'AE1562244',
-      email:'haithamoumerzoug31@gmail.com',
-      lastName:'OUMERZOUG',
-      firstName: 'Haitham',
-      phone:'06523523654',
-      age:28,
-      salary:1000261033,
-      job:'ingénieur',
-      address:'agadir',
-      accountBalance:0
-    }
-    this.clientService.createClient(client)
+  }
+  createClient(){
+    // const client:Client = {
+
+    // }
+    this.clientService.createClient(this.clientForm.value)
     .subscribe(res=>{
-      console.log(res)},err=>{
+      this.clientForm.reset();
+      this.router.navigate(['/applyForCredit']);
+    },
+    err=>{
         console.log(err)
       })
   }
