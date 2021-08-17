@@ -1,3 +1,4 @@
+import { CreditService } from './../../core/_services/credit/credit.service';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -22,9 +23,14 @@ export class HomeComponent implements OnInit {
     job: new FormControl(null,[Validators.required]),
     accountBalance: new FormControl(null,[Validators.required])
   });
+  creditForm = new FormGroup({
+    amount : new FormControl(null,[Validators.required]),
+    monthly : new FormControl(null,[Validators.required])
+  });
 
   constructor(private clientService:ClientService,
-    private router:Router
+    private router:Router,
+    private creditService:CreditService
     ) { }
 
   ngOnInit(): void {
@@ -43,5 +49,17 @@ export class HomeComponent implements OnInit {
       //     console.log(err)
       //   })
       console.log(this.clientForm.value)
-}
+  }
+  createCredit(){
+  //   this.creditService.createCredit(this.creditForm.value,this.CIN)
+  //     .subscribe(res=>{
+  //    this.creditForm.reset();
+  //   this.router.navigate(['/uploadDocument']);
+  //  },
+  //   err=>{
+  //     console.log(err)
+    // })
+    console.log(this.creditForm.value);
+  }
+
 }
