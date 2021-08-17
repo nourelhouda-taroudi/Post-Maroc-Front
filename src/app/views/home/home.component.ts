@@ -5,11 +5,11 @@ import { ClientService } from 'src/app/core/_services/client/client.service';
 import { Client } from 'src/app/core/_services/_models/client.model';
 
 @Component({
-  selector: 'app-client',
-  templateUrl: './client.component.html',
-  styleUrls: ['./client.component.css']
+  selector: 'app-home',
+  templateUrl: './home.component.html',
+  styleUrls: ['./home.component.css']
 })
-export class ClientComponent implements OnInit {
+export class HomeComponent implements OnInit {
   clientForm = new FormGroup({
     CIN_Number : new FormControl(null,[Validators.required]),
     firstName: new FormControl(null,[Validators.required]),
@@ -22,26 +22,26 @@ export class ClientComponent implements OnInit {
     job: new FormControl(null,[Validators.required]),
     accountBalance: new FormControl(null,[Validators.required])
   });
-  constructor(
-    private clientService:ClientService,
+
+  constructor(private clientService:ClientService,
     private router:Router
-  ) { }
+    ) { }
 
   ngOnInit(): void {
   }
-  createClient(){
-    // const client:Client = {
-
-    // }
-    this.clientService.createClient(this.clientForm.value)
-    .subscribe(res=>{
-      const CIN=this.clientForm.controls["CIN_Number"].value;
-      this.router.navigate(['/applyForCredit',CIN]);
-      this.clientForm.reset();
-    },
-    err=>{
-        console.log(err)
-      })
-  }
-
+    createClient(){
+      // const client:Client = {
+  
+      // }
+      // this.clientService.createClient(this.clientForm.value)
+      // .subscribe(res=>{
+      //   const CIN=this.clientForm.controls["CIN_Number"].value;
+      //   this.router.navigate(['/applyForCredit',CIN]);
+      //   this.clientForm.reset();
+      // },
+      // err=>{
+      //     console.log(err)
+      //   })
+      console.log(this.clientForm.value)
+}
 }

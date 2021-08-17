@@ -12,6 +12,7 @@ import { ClientComponent } from './views/client/client.component';
 import { CreditComponent } from './views/credit/credit.component';
 import { DocumentComponent } from './views/document/document.component';
 import { HttpClientModule } from '@angular/common/http';
+import { HomeComponent } from './views/home/home.component';
 
 
 @NgModule({
@@ -20,12 +21,13 @@ import { HttpClientModule } from '@angular/common/http';
     ClientComponent,
     CreditComponent,
     DocumentComponent,
+    HomeComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-	ReactiveFormsModule
+	  ReactiveFormsModule,
 	
   ],
   providers: [

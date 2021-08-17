@@ -1,0 +1,135 @@
+<div class="container-fluid">
+    <div class="row justify-content-center">
+        <div class="col-10 col-sm-10 col-md-8 col-lg-8 col-xl-10 text-center p-0 mt-3 mb-2">
+            <div class="card px-0 pt-4 pb-0 mt-3 mb-3">
+                <h2 id="heading">Post Maroc Crédit</h2>
+                <p>Bienvenu au poste maroc crédit </p>
+                <div id="msform">
+                    <!-- progressbar -->
+                    <ul id="progressbar">
+                        <li class="fa fa-th-list active" aria-hidden="true" id="terms"><strong>Trems</strong></li>
+                        <li class="fa fa-user" aria-hidden="true" id="account"><strong>Compte</strong></li>
+                        <li class="fa fa-money" aria-hidden="true" id="personal"><strong>Crédit</strong></li>
+                        <li class="fa fa-file" aria-hidden="true" id="payment"><strong>Document</strong></li>
+                        <li class="fa fa-check" aria-hidden="true" id="confirm"><strong>Confirmation</strong></li>
+                    </ul>
+                    <div class="progress">
+                        <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuemin="0" aria-valuemax="100"></div>
+                    </div> <br> <!-- fieldsets -->
+                    <form class="p-3 justify-content-center text-center">
+                        <h4 class="heading">Terms and Conditions</h4>
+                        <div class="row justify-content-center mb-4">
+                            <div class="col-lg-9 col-md-11 col-12 list text-left">
+                                <div class="col-lg-3 col-md-1 col-0"></div>
+                                <ol type="1" class="pl-3 text-muted mb-5">
+                                    <li>Lorem ipsum dolor sit amet</li>
+                                    <li>Consectuer adipiscing eut, sed diamnanummy</li>
+                                    <li>Lorem ipsum dolor sit amet</li>
+                                    <li>Consectuer adipiscing eut, sed diamnanummy</li>
+                                </ol>
+                                <div class="custom-control custom-checkbox mb-3"> 
+                                    <input id="customCheck1" type="checkbox" class="custom-control-input" checked="1"> 
+                                    <label for="customCheck1" class="custom-control-label">I have read and agree to the following Terms and Conditions</label> 
+                                </div>
+                            </div>
+                        </div> <input type="button" name="next" class="next action-button" value="Start" />
+                    </form>
+                    <form [formGroup]="clientForm">
+                        <div class="form-card">
+                            <div class="row">
+                                <div class="col-7">
+                                    <h2 class="fs-title">Information de client:</h2>
+                                </div>
+                                <div class="col-5">
+                                    <h2 class="steps">1/4</h2>
+                                </div>
+                            </div> <label class="fieldlabels">Numéro de CIN: *</label>
+                             <input type="text" name="CIN" placeholder="CIN" formControlName="CIN_Number" />
+                              <label class="fieldlabels">Prénom: *</label> 
+                              <input type="text" name="firstname" placeholder="Prénom" formControlName="firstName" />
+                             <label class="fieldlabels">Nom: *</label>
+                              <input type="text" name="lastname" placeholder="Nom" formControlName="lastName" />
+                               <label class="fieldlabels">Email: *</label>
+                                <input type="email" name="emaail" placeholder="Email" formControlName="email"/>
+                                <label class="fieldlabels">Adresse: *</label>
+                              <input type="text" name="address" placeholder="Adresse" formControlName="address" />
+                              <label class="fieldlabels">Téléphone: *</label>
+                              <input type="number" name="phone" placeholder="téléphone" formControlName="phone" />
+                              <label class="fieldlabels">Age: *</label>
+                              <input type="number" name="age" placeholder="âge" formControlName="age" />
+                              <label class="fieldlabels">Salaire: *</label>
+                              <input type="number" name="salary" placeholder="salaire" formControlName="salary" />
+                              <label class="fieldlabels">Fonction: *</label>
+                              <input type="text" name="job" placeholder="fonction ou emplois" formControlName="job" />
+                              <!-- <label class="fieldlabels">Solde: *</label>
+                              <input type="number" name="accountBalance" placeholder="votre solde" formControlName="accountBalance" /> -->
+                        </div> <input type="button" name="next" class="next action-button" value="Next" (click)="createClient()"/>
+                                <input type="button" name="previous" class="previous action-button-previous" value="Previous" />
+                    </form>
+                    <form>
+                        <div class="form-card">
+                            <div class="row">
+                                <div class="col-7">
+                                    <h2 class="fs-title">Information de crédit:</h2>
+                                </div>
+                                <div class="col-5">
+                                    <h2 class="steps">2/4</h2>
+                                </div>
+                            </div> <label class="fieldlabels">Montant: *</label>
+                             <input type="number" name="amount" placeholder="La montant souhaiter" /> 
+                             <label class="fieldlabels">Montant/Moi: *</label>
+                              <input type="numbre" name="monthly" placeholder="le paiment par moi" /> 
+                              <!-- <label class="fieldlabels">Contact No.: *</label> 
+                              <input type="text" name="phno" placeholder="Contact No." /> 
+                              <label class="fieldlabels">Alternate Contact No.: *</label> 
+                              <input type="text" name="phno_2" placeholder="Alternate Contact No." /> -->
+                        </div> <input type="button" name="next" class="next action-button" value="Next" /> <input type="button" name="previous" class="previous action-button-previous" value="Previous" />
+                    </form>
+                    <form>
+                        <div class="form-card">
+                            <div class="row">
+                                <div class="col-7">
+                                    <h2 class="fs-title">Téléchargement de document:</h2>
+                                </div>
+                                <div class="col-5">
+                                    <h2 class="steps">3/4</h2>
+                                </div>
+                            </div> <label class="fieldlabels">Chargement de CIN (RECTO):</label> 
+                            <input type="file" name="pic" accept="image/*"> 
+                            <label class="fieldlabels">Chargement de CIN (VERSO):</label> 
+                            <input type="file" name="pic" accept="image/*">
+                            <label class="fieldlabels">Chargement de certifecat de salaire:</label> 
+                            <input type="file" name="pic" accept="image/*">
+                            <label class="fieldlabels">Chargement de certificat de résidence OU EAU/ELEC:</label> 
+                            <input type="file" name="pic" accept="image/*">
+                            <label class="fieldlabels">Chargement de certifecat de travaille:</label> 
+                            <input type="file" name="pic" accept="image/*">
+                        </div> <input type="button" name="next" class="next action-button" value="Valide" /> 
+                        <input type="button" name="previous" class="previous action-button-previous" value="Previous" />
+                    </form>
+                    <form>
+                        <div class="form-card">
+                            <div class="row">
+                                <div class="col-7">
+                                    <h2 class="fs-title">Fin:</h2>
+                                </div>
+                                <div class="col-5">
+                                    <h2 class="steps">4/4</h2>
+                                </div>
+                            </div> <br><br>
+                            <h2 class="purple-text text-center"><strong>Succès !</strong></h2> <br>
+                            <div class="row justify-content-center">
+                                <div class="col-3"> <img src="https://i.imgur.com/GwStPmg.png" class="fit-image"> </div>
+                            </div> <br><br>
+                            <div class="row justify-content-center">
+                                <div class="col-7 text-center">
+                                    <h5 class="purple-text text-center">Votre demande de crédit a été validé !!!</h5>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

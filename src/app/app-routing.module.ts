@@ -1,3 +1,4 @@
+import { HomeComponent } from './views/home/home.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { ClientComponent } from './views/client/client.component';
@@ -10,12 +11,16 @@ const routes: Routes = [
     component:ClientComponent
   },
   {
-    path:'applyForCredit',
+    path:'applyForCredit/:CIN',
     component:CreditComponent
   },
   {
     path:'uploadDocument',
     component:DocumentComponent
+  },
+  {
+    path:'home',
+    component:HomeComponent
   }
 
 ];
