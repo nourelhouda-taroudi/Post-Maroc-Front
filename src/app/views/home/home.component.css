@@ -215,3 +215,20 @@ p {
     width: 100%;
     object-fit: cover
 }
+.fieldlabels.is__invalid {
+    --cdm-border-opacity: 1;
+    border-color: rgba(220, 38, 38, var(--cdm-border-opacity));
+    margin-bottom: 0px;
+  }
+ .fieldlabels.is__invalid:focus {
+    --cdm-border-opacity: 1;
+    border-color: rgba(220, 38, 38, var(--cdm-border-opacity));
+  }
+  .invalid__feedback {
+    font-weight: 500;
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+    margin-top: 0.25rem;
+    --cdm-text-opacity: 1;
+    color: rgba(220, 38, 38, var(--cdm-text-opacity))
+  }
