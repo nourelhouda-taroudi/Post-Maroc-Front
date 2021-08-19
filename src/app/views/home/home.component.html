@@ -34,7 +34,19 @@
                             </div>
                         </div> <input type="button" name="next" class="next action-button" value="Start" />
                     </form>
+
+                    <!-- Step 1 -->
+                    
                     <form [formGroup]="clientForm">
+                        <!-- <div class="invalid__feedback" >
+                            <h4>
+                                
+                            </h4>
+                        </div> -->
+                        <div class="alert" *ngIf="hasFormErrors">
+                            <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+                            Les champs <strong>(*)</strong> son obligatoire!
+                        </div>
                         <div class="form-card">
                             <div class="row">
                                 <div class="col-7">
@@ -43,48 +55,161 @@
                                 <div class="col-5">
                                     <h2 class="steps">1/4</h2>
                                 </div>
-                            </div> <label class="fieldlabels">Numéro de CIN: *</label>
-                             <input type="text" name="CIN" placeholder="CIN" formControlName="CIN_Number" 
-                              [ngClass]="{'is__invalid' : isClientControlHasError('CIN_Number','required')}"/>
-                             <div class="invalid__feedback" *ngIf="isClientControlHasError('CIN_Number','required')">Numéro de CIN est obligatoire </div>
-                              <label class="fieldlabels">Prénom: *</label> 
-                              <input type="text" name="firstname" placeholder="Prénom" formControlName="firstName" 
-                               [ngClass]="{'is__invalid' : isClientControlHasError('firstName','required')}"/>
-                              <div class="invalid__feedback" *ngIf="isClientControlHasError('firstName','required')">Prénom est obligatoire</div>
-                              <label class="fieldlabels">Nom: *</label>
-                              <input type="text" name="lastname" placeholder="Nom" formControlName="lastName" 
-                               [ngClass]="{'is__invalid' : isClientControlHasError('lastName','required')}"/>
-                              <div class="invalid__feedback" *ngIf="isClientControlHasError('lastName','required')">Nom est obligatoire </div>
-                              <label class="fieldlabels">Email: *</label>
-                                <input type="email" name="email" placeholder="Email" formControlName="email"
-                                [ngClass]="{'is__invalid' : isClientControlHasError('email','required') || isClientControlHasError('email','email')}"/>                                <div class="invalid__feedback" *ngIf="isClientControlHasError('CIN_Number','required')">Email est obligatoire </div>
-                                <label class="fieldlabels">Adresse: *</label>
-                              <input type="text" name="address" placeholder="Adresse" formControlName="address" 
-                               [ngClass]="{'is__invalid' : isClientControlHasError('address','required')}"/>
-                              <div class="invalid__feedback" *ngIf="isClientControlHasError('address','required')">Adresse est obligatoire </div>
-                              <label class="fieldlabels">Téléphone: *</label>
-                              <input type="number" name="phone" placeholder="téléphone" formControlName="phone" 
-                               [ngClass]="{'is__invalid' : isClientControlHasError('phone','required')}"/>
-                              <div class="invalid__feedback" *ngIf="isClientControlHasError('phone','required')">Téléphone est obligatoire </div>
-                              <label class="fieldlabels">Age: *</label>
-                              <input type="number" name="age" placeholder="âge" formControlName="age" 
-                               [ngClass]="{'is__invalid' : isClientControlHasError('age','required')}"/>
-                              <div class="invalid__feedback" *ngIf="isClientControlHasError('age','required')">Age est obligatoire </div>
-                              <label class="fieldlabels">Salaire: *</label>
-                              <input type="number" name="salary" placeholder="salaire" formControlName="salary" 
-                               [ngClass]="{'is__invalid' : isClientControlHasError('salary','required')}"/>
-                              <div class="invalid__feedback" *ngIf="isClientControlHasError('salary','required')">Salaire est obligatoire </div>
-                              <label class="fieldlabels">Fonction: *</label>
-                              <input type="text" name="job" placeholder="fonction ou emplois" formControlName="job" 
-                               [ngClass]="{'is__invalid' : isClientControlHasError('job','required')}"/>
-                              <div class="invalid__feedback" *ngIf="isClientControlHasError('job','required')">Fonction est obligatoire </div>
+                            </div> 
+                            
+                            <div class="form_group">
+                                <label class="fieldlabels">Numéro de CIN: *</label>
+                                <input type="text" 
+                                    name="CIN" 
+                                    placeholder="CIN" 
+                                    formControlName="CIN_Number" 
+                                    [ngClass]="{'is__invalid' : isClientControlHasError('CIN_Number','required')}"
+                                />
+                                <div class="invalid__feedback" 
+                                    *ngIf="isClientControlHasError('CIN_Number','required')">
+                                    Numéro de CIN est obligatoire 
+                                </div>
+                            </div>
 
+                            <div class="form_group">
+                                <label class="fieldlabels">Prénom: *</label> 
+                                <input type="text" 
+                                    name="firstname" 
+                                    placeholder="Prénom" 
+                                    formControlName="firstName" 
+                                    [ngClass]="{'is__invalid' : isClientControlHasError('firstName','required')}"
+                                />
+                                <div class="invalid__feedback" 
+                                    *ngIf="isClientControlHasError('firstName','required')">
+                                    Prénom est obligatoire
+                                </div>
+                            </div>
                               
-                              <!-- <label class="fieldlabels">Solde: *</label>
-                              <input type="number" name="accountBalance" placeholder="votre solde" formControlName="accountBalance" /> -->
-                        </div> <input type="button" name="next" [disabled]="clientForm.invalid" class="next action-button" value="Next" (click)="createClient()"/>
-                                <input type="button" name="previous" class="previous action-button-previous" value="Previous" />
+                            <div class="form_group">
+                                <label class="fieldlabels">Nom: *</label>
+                                <input type="text" 
+                                    name="lastname" 
+                                    placeholder="Nom" 
+                                    formControlName="lastName" 
+                                    [ngClass]="{'is__invalid' : isClientControlHasError('lastName','required')}"
+                                />
+                                <div class="invalid__feedback" 
+                                    *ngIf="isClientControlHasError('lastName','required')">
+                                    Nom est obligatoire 
+                                </div>
+                            </div>
+
+                            <div class="form_group">
+                                <label class="fieldlabels">Email: *</label>
+                                <input type="email" 
+                                    name="email" 
+                                    placeholder="Email" 
+                                    formControlName="email"
+                                    [ngClass]="{'is__invalid' : isClientControlHasError('email','required') || isClientControlHasError('email','email')}"
+                                />                                
+                                <div class="invalid__feedback"
+                                    *ngIf="isClientControlHasError('email','required')">
+                                    Email est obligatoire 
+                                </div>
+                                <div class="invalid__feedback"
+                                    *ngIf="isClientControlHasError('email','email')">
+                                    Email est invalid 
+                                </div>
+                            </div>
+
+                            <div class="form_group">
+                                <label class="fieldlabels">Adresse: *</label>
+                                <input type="text" 
+                                    name="address" 
+                                    placeholder="Adresse" 
+                                    formControlName="address" 
+                                    [ngClass]="{'is__invalid' : isClientControlHasError('address','required')}"
+                                />
+                                <div class="invalid__feedback" 
+                                    *ngIf="isClientControlHasError('address','required')">
+                                    Adresse est obligatoire 
+                                </div>
+                            </div>
+
+                            <div class="form_group">
+                                <label class="fieldlabels">Téléphone: *</label>
+                                  <input type="number" 
+                                    name="phone" 
+                                    placeholder="téléphone" 
+                                    formControlName="phone" 
+                                    [ngClass]="{'is__invalid' : isClientControlHasError('phone','required')}"
+                                />
+                                <div class="invalid__feedback" 
+                                *ngIf="isClientControlHasError('phone','required')">
+                                    Téléphone est obligatoire 
+                                </div>
+                            </div>                              
+
+                            <div class="form_group">
+                                <label class="fieldlabels">Age: *</label>
+                                <input type="number" 
+                                    name="age" 
+                                    placeholder="âge" 
+                                    formControlName="age" 
+                                    [ngClass]="{'is__invalid' : isClientControlHasError('age','required')}"
+                                />
+                                <div class="invalid__feedback" 
+                                    *ngIf="isClientControlHasError('age','required')">
+                                    Age est obligatoire 
+                                </div>
+                                <div class="invalid__feedback" 
+                                    *ngIf="isClientControlHasError('age','min') || isClientControlHasError('age','max')">
+                                    Age doit être entre 20 et 50 ans 
+                                </div>
+                            </div>
+
+                            <div class="form_group">
+                                <label class="fieldlabels">Salaire: *</label>
+                                <input type="number" 
+                                    name="salary" 
+                                    placeholder="salaire" 
+                                    formControlName="salary" 
+                                [ngClass]="{'is__invalid' : isClientControlHasError('salary','required')}"
+                                />
+                                <div class="invalid__feedback" 
+                                    *ngIf="isClientControlHasError('salary','required')">
+                                    Salaire est obligatoire 
+                                </div>
+                                <div class="invalid__feedback" 
+                                    *ngIf="isClientControlHasError('salary','min')">
+                                    Salaire doit être au minimum 1500 DH 
+                                </div>
+                            </div>                              
+                              
+                            <div class="form_group">
+                                <label class="fieldlabels">Fonction: *</label>
+                                <input type="text" 
+                                    name="job" 
+                                    placeholder="fonction ou emplois" 
+                                    formControlName="job" 
+                                   [ngClass]="{'is__invalid' : isClientControlHasError('job','required')}"
+                                />
+                                <div class="invalid__feedback" 
+                                    *ngIf="isClientControlHasError('job','required')">
+                                    Fonction est obligatoire 
+                                </div>
+                            </div>
+
+                        </div> 
+                        <!-- Buttons -->
+                        <input type="button" 
+                            name="next" 
+                          
+                            class="next action-button" 
+                            value="Next" 
+                        />
+                        <input type="button" 
+                            name="previous" 
+                            class="previous action-button-previous" 
+                            value="Previous" 
+                        />
                     </form>
+                    <!-- Step 2 -->
                     <form  [formGroup]="creditForm">
                         <div class="form-card">
                             <div class="row">
@@ -94,21 +219,58 @@
                                 <div class="col-5">
                                     <h2 class="steps">2/4</h2>
                                 </div>
-                            </div> <label class="fieldlabels">Montant: *</label>
-                             <input type="number" name="amount" placeholder="La montant souhaiter" formControlName="amount"
-                             [ngClass]="{'is__invalid' : isCreditControlHasError('amount','required')}"/> 
-                            <div class="invalid__feedback" *ngIf="isCreditControlHasError('amount','required')">Montant est obligatoire </div>
+                            </div> 
+                            <div class="form_group">
+                                <label class="fieldlabels">Montant: *</label>
+                                <input type="number" 
+                                    name="amount" 
+                                    placeholder="La montant souhaiter" 
+                                    formControlName="amount"
+                                    [ngClass]="{'is__invalid' : isCreditControlHasError('amount','required')}"
+                                /> 
+                                <div class="invalid__feedback" 
+                                    *ngIf="isCreditControlHasError('amount','required')">
+                                    Montant est obligatoire 
+                                </div>
+                                <div class="invalid__feedback" 
+                                    *ngIf="isCreditControlHasError('amount','min')">
+                                    Montant doit être au minimum 10000 DH 
+                                </div>
+                                <div class="invalid__feedback" 
+                                    *ngIf="!isAmountValid()">
+                                    Montant à dépassé le maximum possible
+                                </div>
+                            </div>
 
-                             <label class="fieldlabels">Montant/Mois: *</label>
-                              <input type="numbre" name="monthly" placeholder="le paiment par moi"  formControlName="monthly"
-                              [ngClass]="{'is__invalid' : isCreditControlHasError('monthly','required')}"/> 
-                            <div class="invalid__feedback" *ngIf="isCreditControlHasError('monthly','required')">Montant par mois est obligatoire </div>
-
-                              <!-- <label class="fieldlabels">Contact No.: *</label> 
-                              <input type="text" name="phno" placeholder="Contact No." /> 
-                              <label class="fieldlabels">Alternate Contact No.: *</label> 
-                              <input type="text" name="phno_2" placeholder="Alternate Contact No." /> -->
-                        </div> <input type="button" name="next" [disabled]="creditForm.invalid" class="next action-button" value="Next" (click)="createCredit()" /> <input type="button" name="previous" class="previous action-button-previous" value="Previous" />
+                            <div class="form_group">
+                                <label class="fieldlabels">Montant/Mois: *</label>
+                                <input type="numbre" 
+                                    name="monthly" 
+                                    placeholder="le paiment par moi"  
+                                    formControlName="monthly"
+                                    [ngClass]="{'is__invalid' : isCreditControlHasError('monthly','required')}"
+                                /> 
+                                <div class="invalid__feedback" 
+                                    *ngIf="isCreditControlHasError('monthly','required')">
+                                    Montant par mois est obligatoire 
+                                </div>
+                                <div class="invalid__feedback" 
+                                    *ngIf="isCreditControlHasError('monthly','min')">
+                                    Montant à payer par mois doit être au minimum 1000 DH 
+                                </div>
+                            </div> 
+                        </div>
+                            
+                        <!-- Buttons -->
+                        <input type="button" name="next"  
+                            class="next action-button" 
+                            value="Next" 
+                        /> 
+                        <input type="button" 
+                            name="previous" 
+                            class="previous action-button-previous" 
+                            value="Previous" 
+                        />
                     </form>
                     <form [formGroup]="documentForm">
                         <div class="form-card">
@@ -119,18 +281,90 @@
                                 <div class="col-5">
                                     <h2 class="steps">3/4</h2>
                                 </div>
-                            </div> <label class="fieldlabels">Chargement de CIN (RECTO):</label> 
-                            <input type="file" name="pic" accept="image/*" (change)="onFileChange($event,'CIN_front')" formControlName="CIN_front"> 
-                            <label class="fieldlabels">Chargement de CIN (VERSO):</label> 
-                            <input type="file" name="pic" accept="image/*" (change)="onFileChange($event,'CIN_back')" formControlName="CIN_back">
-                            <label class="fieldlabels">Chargement de certifecat de salaire:</label> 
-                            <input type="file" name="pic" accept="image/*" (change)="onFileChange($event,'salaryCertificat')" formControlName="salaryCertificat">
-                            <label class="fieldlabels">Chargement de certificat de résidence OU EAU/ELEC:</label> 
-                            <input type="file" name="pic" accept="image/*" (change)="onFileChange($event,'certificateResWaterElec')" formControlName="certificateResWaterElec">
-                            <label class="fieldlabels">Chargement de certifecat de travaille:</label> 
-                            <input type="file" name="pic" accept="image/*" (change)="onFileChange($event,'jobCertificate')" formControlName="jobCertificate" >
-                        </div> <input type="button" name="next" (click)="uploadDocument()" class="next action-button" value="Valide" /> 
-                        <input type="button" name="previous" class="previous action-button-previous" value="Previous" />
+                            </div>
+                            <div class="form_group"> 
+                                <label class="fieldlabels">Chargement de CIN (RECTO) : *</label> 
+                                <input type="file" 
+                                    name="pic" 
+                                    accept="image/*" 
+                                    (change)="onFileChange($event,'CIN_front')" 
+                                    formControlName="CIN_front"
+                                > 
+                                <div class="invalid__feedback" 
+                                    *ngIf="isDocumentControlHasError('CIN_front','required')">
+                                    Ce fichier est obligatoire 
+                                </div>
+                            </div>
+
+                            <div class="form_group">
+                                <label class="fieldlabels">Chargement de CIN (VERSO) : *</label> 
+                                <input type="file" 
+                                    name="pic" 
+                                    accept="image/*" 
+                                    (change)="onFileChange($event,'CIN_back')" 
+                                    formControlName="CIN_back"
+                                >
+                                <div class="invalid__feedback" 
+                                    *ngIf="isDocumentControlHasError('CIN_back','required')">
+                                    Ce fichier est obligatoire 
+                                </div>
+                            </div>
+
+                            <div class="form_group">
+                                <label class="fieldlabels">Chargement de certifecat de salaire : *</label> 
+                                <input type="file" 
+                                    name="pic" 
+                                    accept="image/*" 
+                                    (change)="onFileChange($event,'salaryCertificat')" 
+                                    formControlName="salaryCertificat"
+                                >
+                                <div class="invalid__feedback" 
+                                    *ngIf="isDocumentControlHasError('salaryCertificat','required')">
+                                    Ce fichier est obligatoire 
+                                </div>
+                            </div>
+
+                            <div class="form_group">
+                                <label class="fieldlabels">Chargement de certificat de résidence OU EAU/ELEC : *</label> 
+                                <input type="file" 
+                                    name="pic" 
+                                    accept="image/*" 
+                                    (change)="onFileChange($event,'certificateResWaterElec')" 
+                                    formControlName="certificateResWaterElec"
+                                >
+                                <div class="invalid__feedback" 
+                                    *ngIf="isDocumentControlHasError('certificateResWaterElec','required')">
+                                    Ce fichier est obligatoire 
+                                </div>
+                            </div>
+
+                            <div class="form_group">
+                                <label class="fieldlabels">Chargement de certifecat de travaille : *</label> 
+                                <input type="file" 
+                                    name="pic" 
+                                    accept="image/*" 
+                                    (change)="onFileChange($event,'jobCertificate')" 
+                                    formControlName="jobCertificate" 
+                                >
+                                <div class="invalid__feedback" 
+                                    *ngIf="isDocumentControlHasError('jobCertificate','required')">
+                                    Ce fichier est obligatoire 
+                                </div>
+                            </div> 
+                        </div>
+                        <!-- Buttons -->
+                        <input type="button" 
+                            name="next"
+                            class="next action-button" 
+                            value="Valide" 
+                            [disabled]="documentForm.invalid" 
+                            (click)="uploadDocument()"
+                        /> 
+                        <input type="button" 
+                            name="previous" 
+                            class="previous action-button-previous" 
+                            value="Previous" 
+                        />
                     </form>
                     <form>
                         <div class="form-card">
@@ -144,7 +378,9 @@
                             </div> <br><br>
                             <h2 class="purple-text text-center"><strong>Succès !</strong></h2> <br>
                             <div class="row justify-content-center">
-                                <div class="col-3"> <img src="https://i.imgur.com/GwStPmg.png" class="fit-image"> </div>
+                                <div class="col-3"> 
+                                    <img src="https://i.imgur.com/GwStPmg.png" class="fit-image"> 
+                                </div>
                             </div> <br><br>
                             <div class="row justify-content-center">
                                 <div class="col-7 text-center">

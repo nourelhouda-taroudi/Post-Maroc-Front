@@ -42,12 +42,14 @@ p {
     display: none
 }
 
-#msform input,
-#msform textarea {
+.form_group{
+    margin-bottom: 25px;
+}
+
+#msform input{
     padding: 8px 15px 8px 15px;
     border: 1px solid #ccc;
     border-radius: 0px;
-    margin-bottom: 25px;
     margin-top: 2px;
     width: 100%;
     box-sizing: border-box;
@@ -58,14 +60,14 @@ p {
     letter-spacing: 1px
 }
 
-#msform input:focus,
-#msform textarea:focus {
+#msform input:focus {
     -moz-box-shadow: none !important;
     -webkit-box-shadow: none !important;
     box-shadow: none !important;
     border: 1px solid #673AB7;
     outline-width: 0
 }
+
 
 #msform .action-button {
     width: 100px;
@@ -78,6 +80,24 @@ p {
     padding: 10px 5px;
     margin: 10px 0px 10px 5px;
     float: right
+}
+
+.fieldlabels.is__invalid {
+    --cdm-border-opacity: 1;
+    border-color: rgba(220, 38, 38, var(--cdm-border-opacity));
+    margin-bottom: 0px;
+}
+.fieldlabels.is__invalid:focus {
+    --cdm-border-opacity: 1;
+    border-color: rgba(220, 38, 38, var(--cdm-border-opacity));
+}
+.invalid__feedback {
+    font-weight: 500;
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+    margin-top: 0.25rem;
+    --cdm-text-opacity: 1;
+    color: rgba(220, 38, 38, var(--cdm-text-opacity))
 }
 
 #msform .action-button:hover,
@@ -215,20 +235,33 @@ p {
     width: 100%;
     object-fit: cover
 }
-.fieldlabels.is__invalid {
-    --cdm-border-opacity: 1;
-    border-color: rgba(220, 38, 38, var(--cdm-border-opacity));
-    margin-bottom: 0px;
+/* The alert message box */
+.alert {
+    padding: 20px;
+    background-color: #f44336; /* Red */
+    color: white;
+    margin-bottom: 15px;
+    font-size: 18px;
   }
- .fieldlabels.is__invalid:focus {
-    --cdm-border-opacity: 1;
-    border-color: rgba(220, 38, 38, var(--cdm-border-opacity));
-  }
-  .invalid__feedback {
-    font-weight: 500;
-    font-size: 0.875rem;
-    line-height: 1.25rem;
-    margin-top: 0.25rem;
-    --cdm-text-opacity: 1;
-    color: rgba(220, 38, 38, var(--cdm-text-opacity))
-  }
+  
+/* The close button */
+.closebtn {
+    margin-left: 15px;
+    color: white;
+    font-weight: bold;
+    float: right;
+    font-size: 22px;
+    line-height: 20px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+  
+/* When moving the mouse over the close button */
+.closebtn:hover {
+    color: #673AB7;
+}
+@media screen and (max-width: 500px) {
+    .alert {
+        font-size: 13px;
+    }
+}

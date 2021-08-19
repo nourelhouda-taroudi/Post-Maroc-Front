@@ -1,3 +1,4 @@
+import { DocumentService } from './../../core/_services/document/document.service';
 import { CreditService } from './../../core/_services/credit/credit.service';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
@@ -12,60 +13,85 @@ import { Client } from 'src/app/core/_services/_models/client.model';
 })
 export class HomeComponent implements OnInit {
   imageSrc:any;
+  hasFormErrors : boolean = false;
   clientForm = new FormGroup({
     CIN_Number : new FormControl(null,[Validators.required]),
     firstName: new FormControl(null,[Validators.required]),
     lastName: new FormControl(null, [Validators.required]),
     email : new FormControl(null,[Validators.required,Validators.email]),
     phone: new FormControl(null,[Validators.required]),
-    age: new FormControl(null,[Validators.required]),
-    salary: new FormControl(null,[Validators.required]),
+    age: new FormControl(null,[Validators.required,Validators.min(20),Validators.max(50)]),
+    salary: new FormControl(null,[Validators.required,Validators.min(1500)]),
     address: new FormControl(null,[Validators.required]),
     job: new FormControl(null,[Validators.required])
   });
   creditForm = new FormGroup({
-    amount : new FormControl(null,[Validators.required]),
-    monthly : new FormControl(null,[Validators.required])
+    amount : new FormControl(null,[Validators.required,Validators.min(10000)]),
+    monthly : new FormControl(null,[Validators.required,Validators.min(1000)])
   });
   documentForm = new FormGroup({
-    CIN_front : new FormControl(null,[Validators.required]),
-    CIN_back : new FormControl(null,[Validators.required]),
-    salaryCertificat : new FormControl(null,[Validators.required]),
-    certificateResWaterElec : new FormControl(null,[Validators.required]),
-    jobCertificate : new FormControl(null,[Validators.required])
+    CIN_front : new FormControl('',[Validators.required]),
+    CIN_back : new FormControl('',[Validators.required]),
+    salaryCertificat : new FormControl('',[Validators.required]),
+    certificateResWaterElec : new FormControl('',[Validators.required]),
+    jobCertificate : new FormControl('',[Validators.required])
   })
 
-  constructor(private clientService:ClientService,
+  constructor(
+    private clientService:ClientService,
     private router:Router,
-    private creditService:CreditService
+    private creditService:CreditService,
+    private documentService:DocumentService
+
     ) { }
 
   ngOnInit(): void {
   }
     createClient(){
-      // const client:Client = {
-  
-      // }
-      // this.clientService.createClient(this.clientForm.value)
-      // .subscribe(res=>{
-      //   const CIN=this.clientForm.controls["CIN_Number"].value;
-      //   this.router.navigate(['/applyForCredit',CIN]);
-      //   this.clientForm.reset();
-      // },
-      // err=>{
-      //     console.log(err)
-      //   })
+      // Check form before 
+      this.checkClientFormIsValid();
+      this.clientService.createClient(this.clientForm.value)
+      .subscribe(res=>{
+        const CIN=this.clientForm.controls["CIN_Number"].value;
+        // this.clientForm.reset();
+        this.createCredit();
+      },
+      err=>{
+          console.log(err)
+        })
   }
   createCredit(){
-  //   this.creditService.createCredit(this.creditForm.value,this.CIN)
-  //     .subscribe(res=>{
-  //    this.creditForm.reset();
-  //   this.router.navigate(['/uploadDocument']);
-  //  },
-  //   err=>{
-  //     console.log(err)
-    // })
+    this.checkCreditFormIsValid();
+    const CIN=this.clientForm.controls["CIN_Number"].value;
+    this.creditService.createCredit(this.creditForm.value,CIN)
+    .subscribe(res=>{
+    // this.creditForm.reset();
+      this.uploadDocument();
+   },
+    err=>{
+      console.log(err)
+    })
   }
+  uploadDocument(){
+    this.checkDocumentFormIsValid();
+    console.log(this.documentForm.value);
+    const CIN=this.clientForm.controls["CIN_Number"].value;
+    const {CIN_front, CIN_back ,salaryCertificat,certificateResWaterElec,jobCertificate}=this.documentForm.value;
+    const formData = new FormData();
+    formData.append('CIN_front',CIN_front );
+    formData.append('CIN_back',CIN_back );
+    formData.append('salaryCertificat',salaryCertificat);
+    formData.append('certificateResWaterElec', certificateResWaterElec);
+    formData.append('jobCertificate', jobCertificate);
+    this.documentService.uploadDocument(formData,CIN)
+      .subscribe(res=>{
+        // this.documentForm.reset();
+          this.uploadDocument();
+        },
+        err=>{
+          console.log(err)
+        })
+    }
   // Check if one of form control has an error
 	isClientControlHasError(controlName: string, validationType: string): boolean {
 		const control = this.clientForm.controls[controlName];
@@ -81,34 +107,99 @@ export class HomeComponent implements OnInit {
 		}
 		return control.hasError(validationType) && (control.dirty || control.touched);
 	}
+  isDocumentControlHasError(controlName: string, validationType: string): boolean {
+		const control = this.creditForm.controls[controlName];
+		if (!control) {
+			return false;
+		}
+    return control.hasError(validationType) && (control.dirty || control.touched);
+	}
   onFileChange(event:any,formControl:string) {
-    // const reader = new FileReader();
-    
-    // if(event.target.files && event.target.files.length) {
-    //   const [file] = event.target.files;
-    //   reader.readAsDataURL(file);
-    
-    //   reader.onload = () => {
-   
-    //     this.imageSrc = reader.result as string;
-    if (event.target.files.length === 0)
-      return;
- 
-    var mimeType = event.target.files[0].type;
-      const selectedImg=<File>event.target.files[0]
-      this.documentForm.patchValue({
-        formControl:selectedImg
-      });
-      var reader = new FileReader();
-      // this.imageSrc = event.target.files; 
-      reader.readAsDataURL(event.target.files[0]); 
-      reader.onload = (_event) => { 
-        this.imageSrc=reader.result;
-
-      }
+    var reader = new FileReader();
+    if (event.target.files.length > 0) {
+        const file = event.target.files[0];
+        this.imageSrc=file;
+        console.log(formControl);
+        this.documentForm.patchValue({
+              formControl:"nour"
+            });
+        reader.readAsDataURL(file); 
+        reader.onload = (_event) => { 
+          this.imageSrc=reader.result;
+        }
+    }        
+        console.log(this.documentForm.controls[formControl].value,this.imageSrc);
   }
-  uploadDocument(){
-    console.log(this.documentForm.value);
+  isAmountValid(){
+    const amount = this.creditForm.controls['amount'].value;
+    const salary = this.clientForm.controls['salary'].value;
+    const age = this.clientForm.controls['age'].value;
+    if(amount!=null && salary!=null && age!=null){
+      if(amount>=1500 && amount<4000){
+        const max = 200000;
+        if(amount>=max){
+          return false
+        }
+        return true
+      }
+   
+    if(salary >= 4000 && salary < 10000){
+      let max = 60000
+      if(age>=40) max=400000;
+
+      if(amount>=max){
+        return false;
+      }
+      return true;
+    }
+    if(salary >= 10000 && salary < 50000){
+      let max = 1000000
+      if(age>=40)max=800000;
+      if(amount>=max){
+        return false;
+      }
+      return true;
+    }
+  }
+    return true;
+  }
+
+  // Check Form is valid
+	checkClientFormIsValid() {
+		this.hasFormErrors = false;
+		const controls     = this.clientForm.controls;
+		if (this.clientForm.invalid) {
+			Object.keys(controls).forEach(controlName =>
+				this.clientForm.controls[controlName].markAsTouched()
+			);
+			this.hasFormErrors = true;
+			return;
+		}
+	}
+  checkCreditFormIsValid() {
+		this.hasFormErrors = false;
+		const controls     = this.creditForm.controls;
+		if (this.creditForm.invalid) {
+			Object.keys(controls).forEach(controlName =>
+				this.creditForm.controls[controlName].markAsTouched()
+			);
+			this.hasFormErrors = true;
+			return;
+		}
+	}
+  checkDocumentFormIsValid() {
+		this.hasFormErrors = false;
+		const controls     = this.documentForm.controls;
+		if (this.documentForm.invalid) {
+			Object.keys(controls).forEach(controlName =>
+				this.documentForm.controls[controlName].markAsTouched()
+			);
+			this.hasFormErrors = true;
+			return;
+		}
+	}
+  submit(){
+    this.createClient();
   }
 
 }
