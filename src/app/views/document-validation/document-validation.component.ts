@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { jsPDF } from 'jspdf'
 import html2canvas from 'html2canvas';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-document-validation',
@@ -9,7 +10,10 @@ import html2canvas from 'html2canvas';
 })
 export class DocumentValidationComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    private route : ActivatedRoute
+  ) { }
+  name : string = "Haitham";
   CIN_number : number = 0;
   firstName : string = "";
   lastName : string = "";
@@ -17,6 +21,7 @@ export class DocumentValidationComponent implements OnInit {
   monthly : number = 0;
   amount : number =0;
   ngOnInit(): void {
+    console.log(this.route.snapshot.paramMap.get('CIN'),this.route.snapshot.paramMap.get('idCredit'));
   }
   exportAsPDF(div_id : string)
   {
@@ -42,4 +47,3 @@ export class DocumentValidationComponent implements OnInit {
   }
 
 }
-
