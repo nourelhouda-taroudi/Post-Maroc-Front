@@ -1,6 +1,6 @@
 import { DocumentService } from './../../core/_services/document/document.service';
 import { CreditService } from './../../core/_services/credit/credit.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ClientService } from 'src/app/core/_services/client/client.service';
@@ -12,6 +12,7 @@ import { Client } from 'src/app/core/_services/_models/client.model';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
+  isChecked:boolean=false;
   imageSrc:any;
   hasFormErrors : boolean = false;
   clientForm = new FormGroup({

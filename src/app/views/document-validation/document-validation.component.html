@@ -1,0 +1,59 @@
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
+
+<div class="page-content container">
+    <div class="page-header text-blue-d2">
+        <h1 class="page-title text-secondary-d1">
+            Invoice
+            <small class="page-info">
+                <i class="fa fa-angle-double-right text-80"></i>
+                ID: #111-222
+            </small>
+        </h1>
+
+        <div class="page-tools">
+            <div class="action-buttons">
+                <a class="btn bg-white btn-light mx-1px text-95" (click)="exportAsPDF('MyDIv')" style="cursor: pointer;" data-title="PDF">
+                    <i class="mr-1 fa fa-file-pdf-o text-danger-m1 text-120 w-2"></i>
+                    Export
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div class="container px-0" id="MyDIv">
+        <div class="row mt-4">
+            <div class="col-12 col-lg-10 offset-lg-1">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="text-center text-150 mt-4" >
+                            <img src="../../../assets/images/logo.png" 
+                                height="120px" 
+                                width="100px" 
+                                alt="Post Maroc" 
+                                class="text-success-m2 mr-1">
+                        </div>
+                    </div>
+                </div>
+                <!-- .row -->
+
+                <hr class="row brc-default-l1 mx-n1 mb-4" />
+                <h1 class="page-title text-secondary-d1 mb-2">
+                    Crédit
+                    <small class="page-info">
+                        ID: #111-222
+                    </small>
+                </h1>
+                <p>je suis {{firstName}}{{lastName}},le porteur de la carte d'identité {{CIN_Number}} ,j'emprunt de la banque Poste Maroc le jour {{dateAujourdHui}}, un montant de {{amount}}  à condition de payer chaque mois le montant {{monthly}} durant {{duration}} mois.</p>
+                <hr/>
+                <div class="justify-content-between d-flex mb-3">
+                    <span class="text-secondary-d1 text-105">Post Maroc, la banque qui ouvre les ports à tous.</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <hr />
+    <div class="justify-content-between d-flex mb-3">
+        <span class="text-secondary-d1 text-105"></span>
+        <a href="#" class="btn btn-info btn-bold px-4 float-right mt-3 mt-lg-0">Signer le document</a>
+    </div>
+</div>

@@ -1,3 +1,4 @@
+<app-navbar></app-navbar>
 <div class="container-fluid">
     <div class="row justify-content-center">
         <div class="col-10 col-sm-10 col-md-8 col-lg-8 col-xl-10 text-center p-0 mt-3 mb-2">
@@ -8,7 +9,7 @@
                     <!-- progressbar -->
                     <ul id="progressbar">
                         <li class="fa fa-th-list active" aria-hidden="true" ><strong>Régles</strong></li>
-                        <li class="fa fa-user" aria-hidden="true" ><strong>Compte</strong></li>
+                        <li class="fa fa-user" aria-hidden="true" ><strong>Client</strong></li>
                         <li class="fa fa-money" aria-hidden="true" ><strong>Crédit</strong></li>
                         <li class="fa fa-file" aria-hidden="true" ><strong>Document</strong></li>
                         <li class="fa fa-check" aria-hidden="true" ><strong>Confirmation</strong></li>
@@ -22,17 +23,23 @@
                             <div class="col-lg-9 col-md-11 col-12 list text-left">
                                 <div class="col-lg-3 col-md-1 col-0"></div>
                                 <ol type="1" class="pl-3 text-muted mb-5">
-                                    <li>Lorem ipsum dolor sit amet</li>
-                                    <li>Consectuer adipiscing eut, sed diamnanummy</li>
-                                    <li>Lorem ipsum dolor sit amet</li>
-                                    <li>Consectuer adipiscing eut, sed diamnanummy</li>
+                                    <li>L'âge doit être entre 20 et 50</li>
+                                    <li>Le salaire doit être au minimum 1500 dh par mois</li>
+                                    <li> Le candidat doit présenter les documents suivants: </li>
+                                    <li>
+                                              <ul> Carte d'Identité National (CIN) </ul>
+                                              <ul> Certificat de salaire</ul>
+                                              <ul> Certificat de résidence ou EAU/ElEC</ul> 
+                                              <ul> Certificat de travaille</ul>
+                                    </li>
+                                    <li>Respecter tous les champs demander à remplir</li>
                                 </ol>
                                 <div class="custom-control custom-checkbox mb-3"> 
-                                    <input id="customCheck1" type="checkbox" class="custom-control-input" checked="1"> 
-                                    <label for="customCheck1" class="custom-control-label">I have read and agree to the following Terms and Conditions</label> 
+                                    <input id="customCheck1" type="checkbox" class="custom-control-input" [(ngModel)]="isChecked" [ngModelOptions]="{standalone: true}"> 
+                                    <label for="customCheck1" class="custom-control-label">Je lis et J'accepte les conditions</label> 
                                 </div>
                             </div>
-                        </div> <input type="button" name="next" class="next action-button" value="Start" />
+                        </div> <input type="button" name="next" class="next action-button" value="Start" [disabled]="!isChecked" />
                     </form>
 
                     <!-- Step 1 -->
