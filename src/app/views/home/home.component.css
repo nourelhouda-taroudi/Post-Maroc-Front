@@ -10,6 +10,10 @@ html {
 p {
     color: grey
 }
+.page-wrapper {
+    width: 100%;
+    height: auto;
+}
 
 #heading {
     text-transform: uppercase;
