@@ -1,5 +1,4 @@
-<app-navbar></app-navbar>
-<div class="container-fluid">
+<div class="container-fluid mt-5">
     <div class="row justify-content-center">
         <div class="col-10 col-sm-10 col-md-8 col-lg-8 col-xl-10 text-center p-0 mt-3 mb-2">
             <div class="card px-0 pt-4 pb-0 mt-3 mb-3">
@@ -9,14 +8,14 @@
                     <!-- progressbar -->
                     <ul id="progressbar">
                         <li class="fa fa-th-list active" aria-hidden="true" ><strong>Régles</strong></li>
-                        <li class="fa fa-user" aria-hidden="true" ><strong>Client</strong></li>
+                        <li class="fa fa-user" aria-hidden="true" ><strong>Compte</strong></li>
                         <li class="fa fa-money" aria-hidden="true" ><strong>Crédit</strong></li>
                         <li class="fa fa-file" aria-hidden="true" ><strong>Document</strong></li>
                         <li class="fa fa-check" aria-hidden="true" ><strong>Confirmation</strong></li>
                     </ul>
                     <div class="progress">
                         <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuemin="0" aria-valuemax="100"></div>
-                    </div> <br> <!-- fieldsets -->
+                    </div> <br> <!-- forms -->
                     <form class="p-3 justify-content-center text-center">
                         <h4 class="heading">Principale Conditions:</h4>
                         <div class="row justify-content-center mb-4">
@@ -27,10 +26,12 @@
                                     <li>Le salaire doit être au minimum 1500 dh par mois</li>
                                     <li> Le candidat doit présenter les documents suivants: </li>
                                     <li>
-                                              <ul> Carte d'Identité National (CIN) </ul>
-                                              <ul> Certificat de salaire</ul>
-                                              <ul> Certificat de résidence ou EAU/ElEC</ul> 
-                                              <ul> Certificat de travaille</ul>
+                                        <ul>
+                                            <li> Carte d'Identité National (CIN) </li>
+                                            <li> Certificat de salaire</li>
+                                            <li> Certificat de résidence ou EAU/ElEC</li> 
+                                            <li> Certificat de travaille</li>
+                                        </ul>
                                     </li>
                                     <li>Respecter tous les champs demander à remplir</li>
                                 </ol>
@@ -206,7 +207,7 @@
                         <!-- Buttons -->
                         <input type="button" 
                             name="next" 
-                          
+                            [disabled]="clientForm.invalid"
                             class="next action-button" 
                             value="Next" 
                         />
@@ -271,6 +272,7 @@
                         <!-- Buttons -->
                         <input type="button" name="next"  
                             class="next action-button" 
+                            [disabled]="creditForm.invalid"
                             value="Next" 
                         /> 
                         <input type="button" 
@@ -279,7 +281,7 @@
                             value="Previous" 
                         />
                     </form>
-                    <form [formGroup]="documentForm">
+                    <form>
                         <div class="form-card">
                             <div class="row">
                                 <div class="col-7">
@@ -295,12 +297,12 @@
                                     name="pic" 
                                     accept="image/*" 
                                     (change)="onFileChange($event,'CIN_front')" 
-                                    formControlName="CIN_front"
+                                    
                                 > 
-                                <div class="invalid__feedback" 
+                                <!-- <div class="invalid__feedback" 
                                     *ngIf="isDocumentControlHasError('CIN_front','required')">
                                     Ce fichier est obligatoire 
-                                </div>
+                                </div> -->
                             </div>
 
                             <div class="form_group">
@@ -309,12 +311,12 @@
                                     name="pic" 
                                     accept="image/*" 
                                     (change)="onFileChange($event,'CIN_back')" 
-                                    formControlName="CIN_back"
+                                    
                                 >
-                                <div class="invalid__feedback" 
+                                <!-- <div class="invalid__feedback" 
                                     *ngIf="isDocumentControlHasError('CIN_back','required')">
                                     Ce fichier est obligatoire 
-                                </div>
+                                </div> -->
                             </div>
 
                             <div class="form_group">
@@ -322,13 +324,13 @@
                                 <input type="file" 
                                     name="pic" 
                                     accept="image/*" 
-                                    (change)="onFileChange($event,'salaryCertificat')" 
-                                    formControlName="salaryCertificat"
+                                    (change)="onFileChange($event,'salaryCertificate')" 
+                                    
                                 >
-                                <div class="invalid__feedback" 
+                                <!-- <div class="invalid__feedback" 
                                     *ngIf="isDocumentControlHasError('salaryCertificat','required')">
                                     Ce fichier est obligatoire 
-                                </div>
+                                </div> -->
                             </div>
 
                             <div class="form_group">
@@ -337,12 +339,12 @@
                                     name="pic" 
                                     accept="image/*" 
                                     (change)="onFileChange($event,'certificateResWaterElec')" 
-                                    formControlName="certificateResWaterElec"
+                                    
                                 >
-                                <div class="invalid__feedback" 
+                                <!-- <div class="invalid__feedback" 
                                     *ngIf="isDocumentControlHasError('certificateResWaterElec','required')">
                                     Ce fichier est obligatoire 
-                                </div>
+                                </div> -->
                             </div>
 
                             <div class="form_group">
@@ -351,21 +353,19 @@
                                     name="pic" 
                                     accept="image/*" 
                                     (change)="onFileChange($event,'jobCertificate')" 
-                                    formControlName="jobCertificate" 
                                 >
-                                <div class="invalid__feedback" 
+                                <!-- <div class="invalid__feedback" 
                                     *ngIf="isDocumentControlHasError('jobCertificate','required')">
                                     Ce fichier est obligatoire 
-                                </div>
+                                </div> -->
                             </div> 
                         </div>
                         <!-- Buttons -->
                         <input type="button" 
                             name="next"
                             class="next action-button" 
-                            value="Valide" 
-                            [disabled]="documentForm.invalid" 
-                            (click)="uploadDocument()"
+                            value="Valide"  
+                            (click)="submit()"
                         /> 
                         <input type="button" 
                             name="previous" 
