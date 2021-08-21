@@ -1,6 +1,6 @@
 import { environment } from './../../../../environments/environment';
 import { Observable } from 'rxjs';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
 
@@ -14,7 +14,10 @@ export class DocumentService {
     private http:HttpClient
   ) { }
   
-  uploadDocument(payload:FormData,CIN:string):Observable<any>{
-      return this.http.post(`${API_DOC}/vdxcvbn/uploadDocument`,payload);
+  uploadDocument(payload:any,CIN:string):Observable<any>{
+    const headers = new HttpHeaders();
+    headers.append('Content-Type', 'multipart/form-data');
+    headers.append('Accept', 'application/json');
+    return this.http.post(`${API_DOC}/${CIN}/uploadDocument`,payload,{headers: headers});
   }
 }
