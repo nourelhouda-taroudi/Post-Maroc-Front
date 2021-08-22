@@ -12,10 +12,6 @@ const routes: Routes = [
   },
   {
     path:'document-validation',
-    component:DocumentValidationComponent
-  },
-  {
-    path:'document-validation',
     component:DocumentValidationComponent,
     canActivate: [AccessGuard]
   },

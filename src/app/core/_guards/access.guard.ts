@@ -15,8 +15,8 @@ export class AccessGuard implements CanActivate {
       if(!this.accessService.isAccessValid()){
         // Redirect to home
         this.router.navigate(['/']);
-        // Remove acccess from Local,storage
-        this.accessService.removeAccess();
+        // Remove all from Local,storage
+        this.accessService.removeAll();
         this.clientService.changeAccessStatus(false);
         return false
       }

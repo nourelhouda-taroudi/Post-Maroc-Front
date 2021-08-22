@@ -45,7 +45,7 @@ export class AccessService {
     const firstName : any = this.getClientFirstName();
     const age :any = this.getClientAge();
     const amount = this.getClientCreditAmount();
-    if(age!=null || firstName !=null || amount != null){
+    if(age!=null && firstName !=null && amount != null){
       const c = firstName.charCodeAt(0).toLocaleString()+firstName.charCodeAt(1)?.toLocaleString()+firstName.charCodeAt(3)?.toLocaleString();
       const b = (age+'').charCodeAt(0).toLocaleString()+(age+'').charCodeAt(2).toLocaleString();
       const a = (amount+'').charCodeAt(2).toLocaleString()+(amount+'').charCodeAt(3).toLocaleString()+(amount+'').charCodeAt(5).toLocaleString();
