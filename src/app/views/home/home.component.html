@@ -40,7 +40,7 @@
                                     <label for="customCheck1" class="custom-control-label">Je lis et J'accepte les conditions</label> 
                                 </div>
                             </div>
-                        </div> <input type="button" name="next" class="next action-button" value="Start" [disabled]="!isChecked" />
+                        </div> <input type="button" name="next" class="next action-button" value="Début" [disabled]="!isChecked" />
                     </form>
 
                     <!-- Step 1 -->
@@ -209,12 +209,12 @@
                             name="next" 
                             [disabled]="clientForm.invalid"
                             class="next action-button" 
-                            value="Next" 
+                            value="Suivante" 
                         />
                         <input type="button" 
                             name="previous" 
                             class="previous action-button-previous" 
-                            value="Previous" 
+                            value="Précédente" 
                         />
                     </form>
                     <!-- Step 2 -->
@@ -273,12 +273,12 @@
                         <input type="button" name="next"  
                             class="next action-button" 
                             [disabled]="creditForm.invalid"
-                            value="Next" 
+                            value="Suivante" 
                         /> 
                         <input type="button" 
                             name="previous" 
                             class="previous action-button-previous" 
-                            value="Previous" 
+                            value="Précédente" 
                         />
                     </form>
                     <form>
@@ -364,26 +364,34 @@
                         <input type="button" 
                             name="next"
                             class="next action-button" 
-                            value="Valide"  
-                            (click)="submit()"
+                            value="Suivante"  
                         /> 
                         <input type="button" 
                             name="previous" 
                             class="previous action-button-previous" 
-                            value="Previous" 
+                            value="Précédente" 
                         />
                     </form>
                     <form>
                         <div class="form-card">
                             <div class="row">
                                 <div class="col-7">
-                                    <h2 class="fs-title">Fin:</h2>
+                                    <h2 class="fs-title">Confirmation:</h2>
                                 </div>
                                 <div class="col-5">
                                     <h2 class="steps">4/4</h2>
                                 </div>
                             </div> <br><br>
-                            <h2 class="purple-text text-center"><strong>Succès !</strong></h2> <br>
+                            <div class="">
+                                <h4>Les information personnelle :</h4>
+                                <strong>Nom : </strong><label class="col-form-label">{{clientForm.value.lastName}}</label><br/><br/>
+                                <strong>Prénom : </strong><label class="col-form-label">{{clientForm.value.firstName}}</label><br/><br/>
+                                <strong>CIN : </strong><label class="col-form-label"></label><br/><br/>
+                                <strong>Email : </strong><label class="col-form-label"></label><br/><br/>
+                                <strong>Age : </strong><label class="col-form-label"></label><br/><br/>
+                                <strong>Phone : </strong><label class="col-form-label"></label><br/><br/>
+                            </div>
+                            <!-- <h2 class="purple-text text-center"><strong>Succès !</strong></h2> <br>
                             <div class="row justify-content-center">
                                 <div class="col-3"> 
                                     <img src="https://i.imgur.com/GwStPmg.png" class="fit-image"> 
@@ -393,8 +401,18 @@
                                 <div class="col-7 text-center">
                                     <h5 class="purple-text text-center">Votre demande de crédit a été validé !!!</h5>
                                 </div>
-                            </div>
+                            </div> -->
                         </div>
+                        <input type="button" 
+                            class="action-button" 
+                            value="Valider"  
+                            (click)="submit()"
+                        /> 
+                        <input type="button" 
+                            name="previous" 
+                            class="previous action-button-previous" 
+                            value="Précédente" 
+                        />
                     </form>
                 </div>
             </div>
