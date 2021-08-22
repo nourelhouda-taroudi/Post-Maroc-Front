@@ -9,6 +9,7 @@ import Swal from 'sweetalert2';
 import { AccessService } from 'src/app/core/_services/access/access.service';
 import { Credit } from 'src/app/core/_services/_models/credit.model';
 
+
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -48,7 +49,7 @@ export class HomeComponent implements OnInit {
   ngOnInit(): void {
   }
     createClient(){
-      // Check form before 
+      // Check form before
       this.checkClientFormIsValid();
       this.clientService.createClient(this.clientForm.value)
       .subscribe(res=>{
@@ -74,7 +75,7 @@ export class HomeComponent implements OnInit {
     })
   }
   uploadDocument(idCredit:number){
-    const CIN=this.clientForm.controls["CIN_Number"].value; 
+    const CIN=this.clientForm.controls["CIN_Number"].value;
     this.documentService.uploadDocument(this.formData, CIN)
       .subscribe(res=>{
         // this.documentForm.reset();
@@ -126,18 +127,25 @@ export class HomeComponent implements OnInit {
 		}
     return control.hasError(validationType) && (control.dirty || control.touched);
 	}
+	isMonthlyValid(){
+    const {amount,monthly} = this.creditForm.value;
+    if(monthly!=null  && amount!=null){
+      return (+amount >= +monthly);
+    }
+    return true;
+  }
   onFileChange(event:any,formName:string) {
     var reader = new FileReader();
     if (event.target.files.length > 0) {
       const file = event.target.files[0];
       this.imageSrc=file;
-        
-      reader.readAsDataURL(file); 
-      reader.onload = (_event) => { 
+
+      reader.readAsDataURL(file);
+      reader.onload = (_event) => {
         this.imageSrc=reader.result;
       }
       this.formData.set(formName,file,file.name);
-    }        
+    }
   }
 
   isAmountValid(){
@@ -152,7 +160,7 @@ export class HomeComponent implements OnInit {
         }
         return true
       }
-   
+
     if(salary >= 4000 && salary < 10000){
       let max = 60000
       if(age>=40) max=400000;
@@ -173,7 +181,6 @@ export class HomeComponent implements OnInit {
   }
     return true;
   }
-
   // Check Form is valid
 	checkClientFormIsValid() {
 		this.hasFormErrors = false;
@@ -183,8 +190,9 @@ export class HomeComponent implements OnInit {
 				this.clientForm.controls[controlName].markAsTouched()
 			);
 			this.hasFormErrors = true;
-			return;
+			return true;
 		}
+		return false;
 	}
   checkCreditFormIsValid() {
 		this.hasFormErrors = false;
@@ -213,7 +221,7 @@ export class HomeComponent implements OnInit {
         this.createClient();
       }
     })
-    
+
   }
   initFormData(){
     this.formData.append('CIN_front','' );
