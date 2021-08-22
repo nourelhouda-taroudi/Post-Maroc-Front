@@ -1,26 +1,22 @@
 import { HomeComponent } from './views/home/home.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { ClientComponent } from './views/client/client.component';
-import { CreditComponent } from './views/credit/credit.component';
-import { DocumentComponent } from './views/document/document.component';
+import { DocumentValidationComponent } from './views/document-validation/document-validation.component';
+import { AccessGuard } from './core/_guards/access.guard';
 
 const routes: Routes = [
   {
     path:'',
-    component:ClientComponent
-  },
-  {
-    path:'applyForCredit/:CIN',
-    component:CreditComponent
-  },
-  {
-    path:'uploadDocument',
-    component:DocumentComponent
-  },
-  {
-    path:'home',
     component:HomeComponent
+  },
+  {
+    path:'document-validation',
+    component:DocumentValidationComponent,
+    canActivate: [AccessGuard]
+  },
+  {
+    path:'**',
+    redirectTo :'/' // TODO : Create 404 error page
   }
 
 ];
