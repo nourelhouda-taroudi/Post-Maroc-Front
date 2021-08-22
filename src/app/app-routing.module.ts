@@ -4,10 +4,15 @@ import { RouterModule, Routes } from '@angular/router';
 import { DocumentValidationComponent } from './views/document-validation/document-validation.component';
 import { AccessGuard } from './core/_guards/access.guard';
 
+
 const routes: Routes = [
   {
     path:'',
     component:HomeComponent
+  },
+  {
+    path:'document-validation',
+    component:DocumentValidationComponent
   },
   {
     path:'document-validation',
