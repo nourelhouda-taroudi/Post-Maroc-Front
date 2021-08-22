@@ -16,41 +16,37 @@
                     <div class="progress">
                         <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuemin="0" aria-valuemax="100"></div>
                     </div> <br> <!-- forms -->
-                    <form class="p-3 justify-content-center text-center">
-                        <h4 class="heading">Principale Conditions:</h4>
-                        <div class="row justify-content-center mb-4">
-                            <div class="col-lg-9 col-md-11 col-12 list text-left">
+                    <form class="p-3">
+                        <h4 class="heading text-center"><u>Conditions :</u></h4>
+                        <div class="row my-4 text-left">
+                            <div class="col-12 row">
                                 <div class="col-lg-3 col-md-1 col-0"></div>
-                                <ol type="1" class="pl-3 text-muted mb-5">
-                                    <li>L'âge doit être entre 20 et 50</li>
-                                    <li>Le salaire doit être au minimum 1500 dh par mois</li>
-                                    <li> Le candidat doit présenter les documents suivants: </li>
+                                <ul type="1" class="pl-3 text-muted mb-5">
+                                  <li>L'âge doit être entre <strong>20</strong> et <strong>50</strong></li>
+                                    <li>Le salaire doit être au minimum <strong>1500 DH par mois</strong> </li>
+                                    <li>Le candidat doit présenter les documents suivants: </li>
                                     <li>
                                         <ul>
-                                            <li> Carte d'Identité National (CIN) </li>
+                                          <li> Carte d'Identité National <strong>(CIN)</strong> </li>
                                             <li> Certificat de salaire</li>
-                                            <li> Certificat de résidence ou EAU/ElEC</li> 
+                                            <li> Certificat de résidence ou EAU/ElEC</li>
                                             <li> Certificat de travaille</li>
                                         </ul>
                                     </li>
                                     <li>Respecter tous les champs demander à remplir</li>
-                                </ol>
-                                <div class="custom-control custom-checkbox mb-3"> 
-                                    <input id="customCheck1" type="checkbox" class="custom-control-input" [(ngModel)]="isChecked" [ngModelOptions]="{standalone: true}"> 
-                                    <label for="customCheck1" class="custom-control-label">Je lis et J'accepte les conditions</label> 
+                                </ul>
+                                <div class="custom-control custom-checkbox mb-3">
+                                    <input id="customCheck1" type="checkbox" class="custom-control-input" [(ngModel)]="isChecked" [ngModelOptions]="{standalone: true}">
+                                    <label for="customCheck1" class="custom-control-label">Je lis et J'accepte les conditions</label>
                                 </div>
                             </div>
-                        </div> <input type="button" name="next" class="next action-button" value="Début" [disabled]="!isChecked" />
+                        </div>
+                        <input type="button" name="next" class="next action-button" value="Début" [disabled]="!isChecked" />
                     </form>
 
                     <!-- Step 1 -->
-                    
+
                     <form [formGroup]="clientForm">
-                        <!-- <div class="invalid__feedback" >
-                            <h4>
-                                
-                            </h4>
-                        </div> -->
                         <div class="alert" *ngIf="hasFormErrors">
                             <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
                             Les champs <strong>(*)</strong> son obligatoire!
@@ -63,158 +59,162 @@
                                 <div class="col-5">
                                     <h2 class="steps">1/4</h2>
                                 </div>
-                            </div> 
-                            
+                            </div>
+
                             <div class="form_group">
                                 <label class="fieldlabels">Numéro de CIN: *</label>
-                                <input type="text" 
-                                    name="CIN" 
-                                    placeholder="CIN" 
-                                    formControlName="CIN_Number" 
+                                <input type="text"
+                                    name="CIN"
+                                    placeholder="CIN"
+                                    formControlName="CIN_Number"
                                     [ngClass]="{'is__invalid' : isClientControlHasError('CIN_Number','required')}"
                                 />
-                                <div class="invalid__feedback" 
+                                <div class="invalid__feedback"
                                     *ngIf="isClientControlHasError('CIN_Number','required')">
-                                    Numéro de CIN est obligatoire 
+                                    Numéro de CIN est obligatoire
                                 </div>
                             </div>
 
                             <div class="form_group">
-                                <label class="fieldlabels">Prénom: *</label> 
-                                <input type="text" 
-                                    name="firstname" 
-                                    placeholder="Prénom" 
-                                    formControlName="firstName" 
+                                <label class="fieldlabels">Prénom: *</label>
+                                <input type="text"
+                                    name="firstname"
+                                    placeholder="Prénom"
+                                    formControlName="firstName"
                                     [ngClass]="{'is__invalid' : isClientControlHasError('firstName','required')}"
                                 />
-                                <div class="invalid__feedback" 
+                                <div class="invalid__feedback"
                                     *ngIf="isClientControlHasError('firstName','required')">
                                     Prénom est obligatoire
                                 </div>
                             </div>
-                              
+
                             <div class="form_group">
                                 <label class="fieldlabels">Nom: *</label>
-                                <input type="text" 
-                                    name="lastname" 
-                                    placeholder="Nom" 
-                                    formControlName="lastName" 
+                                <input type="text"
+                                    name="lastname"
+                                    placeholder="Nom"
+                                    formControlName="lastName"
                                     [ngClass]="{'is__invalid' : isClientControlHasError('lastName','required')}"
                                 />
-                                <div class="invalid__feedback" 
+                                <div class="invalid__feedback"
                                     *ngIf="isClientControlHasError('lastName','required')">
-                                    Nom est obligatoire 
+                                    Nom est obligatoire
                                 </div>
                             </div>
 
                             <div class="form_group">
                                 <label class="fieldlabels">Email: *</label>
-                                <input type="email" 
-                                    name="email" 
-                                    placeholder="Email" 
+                                <input type="email"
+                                    name="email"
+                                    placeholder="Email"
                                     formControlName="email"
                                     [ngClass]="{'is__invalid' : isClientControlHasError('email','required') || isClientControlHasError('email','email')}"
-                                />                                
+                                />
                                 <div class="invalid__feedback"
                                     *ngIf="isClientControlHasError('email','required')">
-                                    Email est obligatoire 
+                                    Email est obligatoire
                                 </div>
                                 <div class="invalid__feedback"
                                     *ngIf="isClientControlHasError('email','email')">
-                                    Email est invalid 
+                                    Email est invalide
                                 </div>
                             </div>
 
                             <div class="form_group">
                                 <label class="fieldlabels">Adresse: *</label>
-                                <input type="text" 
-                                    name="address" 
-                                    placeholder="Adresse" 
-                                    formControlName="address" 
+                                <input type="text"
+                                    name="address"
+                                    placeholder="Adresse"
+                                    formControlName="address"
                                     [ngClass]="{'is__invalid' : isClientControlHasError('address','required')}"
                                 />
-                                <div class="invalid__feedback" 
+                                <div class="invalid__feedback"
                                     *ngIf="isClientControlHasError('address','required')">
-                                    Adresse est obligatoire 
+                                    Adresse est obligatoire
                                 </div>
                             </div>
 
                             <div class="form_group">
                                 <label class="fieldlabels">Téléphone: *</label>
-                                  <input type="number" 
-                                    name="phone" 
-                                    placeholder="téléphone" 
-                                    formControlName="phone" 
+                                  <input type="number"
+                                    name="phone"
+                                    placeholder="téléphone"
+                                    formControlName="phone"
                                     [ngClass]="{'is__invalid' : isClientControlHasError('phone','required')}"
                                 />
-                                <div class="invalid__feedback" 
-                                *ngIf="isClientControlHasError('phone','required')">
-                                    Téléphone est obligatoire 
+                                <div class="invalid__feedback"
+                                  *ngIf="isClientControlHasError('phone','required')">
+                                    Téléphone est obligatoire
                                 </div>
-                            </div>                              
+                              <!--<div class="invalid__feedback"
+                                    *ngIf="isClientControlHasError('phone','min') || isClientControlHasError('phone','max')">
+                                    Téléphone est invalide
+                              </div>-->
+                            </div>
 
                             <div class="form_group">
                                 <label class="fieldlabels">Age: *</label>
-                                <input type="number" 
-                                    name="age" 
-                                    placeholder="âge" 
-                                    formControlName="age" 
+                                <input type="number"
+                                    name="age"
+                                    placeholder="âge"
+                                    formControlName="age"
                                     [ngClass]="{'is__invalid' : isClientControlHasError('age','required')}"
                                 />
-                                <div class="invalid__feedback" 
+                                <div class="invalid__feedback"
                                     *ngIf="isClientControlHasError('age','required')">
-                                    Age est obligatoire 
+                                    Age est obligatoire
                                 </div>
-                                <div class="invalid__feedback" 
+                                <div class="invalid__feedback"
                                     *ngIf="isClientControlHasError('age','min') || isClientControlHasError('age','max')">
-                                    Age doit être entre 20 et 50 ans 
+                                    Age doit être entre 20 et 50 ans
                                 </div>
                             </div>
 
                             <div class="form_group">
                                 <label class="fieldlabels">Salaire: *</label>
-                                <input type="number" 
-                                    name="salary" 
-                                    placeholder="salaire" 
-                                    formControlName="salary" 
+                                <input type="number"
+                                    name="salary"
+                                    placeholder="salaire"
+                                    formControlName="salary"
                                 [ngClass]="{'is__invalid' : isClientControlHasError('salary','required')}"
                                 />
-                                <div class="invalid__feedback" 
+                                <div class="invalid__feedback"
                                     *ngIf="isClientControlHasError('salary','required')">
-                                    Salaire est obligatoire 
+                                    Salaire est obligatoire
                                 </div>
-                                <div class="invalid__feedback" 
+                                <div class="invalid__feedback"
                                     *ngIf="isClientControlHasError('salary','min')">
-                                    Salaire doit être au minimum 1500 DH 
-                                </div>
-                            </div>                              
-                              
-                            <div class="form_group">
-                                <label class="fieldlabels">Fonction: *</label>
-                                <input type="text" 
-                                    name="job" 
-                                    placeholder="fonction ou emplois" 
-                                    formControlName="job" 
-                                   [ngClass]="{'is__invalid' : isClientControlHasError('job','required')}"
-                                />
-                                <div class="invalid__feedback" 
-                                    *ngIf="isClientControlHasError('job','required')">
-                                    Fonction est obligatoire 
+                                    Salaire doit être au minimum 1500 DH
                                 </div>
                             </div>
 
-                        </div> 
+                            <div class="form_group">
+                                <label class="fieldlabels">Fonction: *</label>
+                                <input type="text"
+                                    name="job"
+                                    placeholder="fonction ou emplois"
+                                    formControlName="job"
+                                   [ngClass]="{'is__invalid' : isClientControlHasError('job','required')}"
+                                />
+                                <div class="invalid__feedback"
+                                    *ngIf="isClientControlHasError('job','required')">
+                                    Fonction est obligatoire
+                                </div>
+                            </div>
+
+                        </div>
                         <!-- Buttons -->
-                        <input type="button" 
-                            name="next" 
+                        <input type="button"
+                            name="next"
                             [disabled]="clientForm.invalid"
-                            class="next action-button" 
-                            value="Suivante" 
+                            class="next action-button"
+                            value="Suivante"
                         />
-                        <input type="button" 
-                            name="previous" 
-                            class="previous action-button-previous" 
-                            value="Précédente" 
+                        <input type="button"
+                            name="previous"
+                            class="previous action-button-previous"
+                            value="Précédente"
                         />
                     </form>
                     <!-- Step 2 -->
@@ -227,24 +227,24 @@
                                 <div class="col-5">
                                     <h2 class="steps">2/4</h2>
                                 </div>
-                            </div> 
+                            </div>
                             <div class="form_group">
                                 <label class="fieldlabels">Montant: *</label>
-                                <input type="number" 
-                                    name="amount" 
-                                    placeholder="La montant souhaiter" 
+                                <input type="number"
+                                    name="amount"
+                                    placeholder="La montant souhaiter"
                                     formControlName="amount"
                                     [ngClass]="{'is__invalid' : isCreditControlHasError('amount','required')}"
-                                /> 
-                                <div class="invalid__feedback" 
+                                />
+                                <div class="invalid__feedback"
                                     *ngIf="isCreditControlHasError('amount','required')">
-                                    Montant est obligatoire 
+                                    Montant est obligatoire
                                 </div>
-                                <div class="invalid__feedback" 
+                                <div class="invalid__feedback"
                                     *ngIf="isCreditControlHasError('amount','min')">
-                                    Montant doit être au minimum 10000 DH 
+                                    Montant doit être au minimum 10000 DH
                                 </div>
-                                <div class="invalid__feedback" 
+                                <div class="invalid__feedback"
                                     *ngIf="!isAmountValid()">
                                     Montant à dépassé le maximum possible
                                 </div>
@@ -252,33 +252,37 @@
 
                             <div class="form_group">
                                 <label class="fieldlabels">Montant/Mois: *</label>
-                                <input type="numbre" 
-                                    name="monthly" 
-                                    placeholder="le paiment par moi"  
+                                <input type="numbre"
+                                    name="monthly"
+                                    placeholder="le paiment par moi"
                                     formControlName="monthly"
                                     [ngClass]="{'is__invalid' : isCreditControlHasError('monthly','required')}"
-                                /> 
-                                <div class="invalid__feedback" 
+                                />
+                                <div class="invalid__feedback"
                                     *ngIf="isCreditControlHasError('monthly','required')">
-                                    Montant par mois est obligatoire 
+                                    Montant par mois est obligatoire
                                 </div>
-                                <div class="invalid__feedback" 
+                                <div class="invalid__feedback"
                                     *ngIf="isCreditControlHasError('monthly','min')">
-                                    Montant à payer par mois doit être au minimum 1000 DH 
+                                    Montant à payer par mois doit être au minimum 1000 DH
                                 </div>
-                            </div> 
+                                <div class="invalid__feedback"
+                                     *ngIf="!isMonthlyValid()">
+                                      Montant payer par mois à dépassé le montant souhaiter
+                                </div>
+                            </div>
                         </div>
-                            
+
                         <!-- Buttons -->
-                        <input type="button" name="next"  
-                            class="next action-button" 
-                            [disabled]="creditForm.invalid"
-                            value="Suivante" 
-                        /> 
-                        <input type="button" 
-                            name="previous" 
-                            class="previous action-button-previous" 
-                            value="Précédente" 
+                        <input type="button" name="next"
+                            class="next action-button"
+                            [disabled]="creditForm.invalid || !isMonthlyValid()"
+                            value="Suivante"
+                        />
+                        <input type="button"
+                            name="previous"
+                            class="previous action-button-previous"
+                            value="Précédente"
                         />
                     </form>
                     <form>
@@ -291,85 +295,85 @@
                                     <h2 class="steps">3/4</h2>
                                 </div>
                             </div>
-                            <div class="form_group"> 
-                                <label class="fieldlabels">Chargement de CIN (RECTO) : *</label> 
-                                <input type="file" 
-                                    name="pic" 
-                                    accept="image/*" 
-                                    (change)="onFileChange($event,'CIN_front')" 
-                                    
-                                > 
-                                <!-- <div class="invalid__feedback" 
+                            <div class="form_group">
+                                <label class="fieldlabels">Chargement de CIN (RECTO) : *</label>
+                                <input type="file"
+                                    name="pic"
+                                    accept="image/*"
+                                    (change)="onFileChange($event,'CIN_front')"
+
+                                >
+                                <!-- <div class="invalid__feedback"
                                     *ngIf="isDocumentControlHasError('CIN_front','required')">
-                                    Ce fichier est obligatoire 
+                                    Ce fichier est obligatoire
                                 </div> -->
                             </div>
 
                             <div class="form_group">
-                                <label class="fieldlabels">Chargement de CIN (VERSO) : *</label> 
-                                <input type="file" 
-                                    name="pic" 
-                                    accept="image/*" 
-                                    (change)="onFileChange($event,'CIN_back')" 
-                                    
+                                <label class="fieldlabels">Chargement de CIN (VERSO) : *</label>
+                                <input type="file"
+                                    name="pic"
+                                    accept="image/*"
+                                    (change)="onFileChange($event,'CIN_back')"
+
                                 >
-                                <!-- <div class="invalid__feedback" 
+                                <!-- <div class="invalid__feedback"
                                     *ngIf="isDocumentControlHasError('CIN_back','required')">
-                                    Ce fichier est obligatoire 
+                                    Ce fichier est obligatoire
                                 </div> -->
                             </div>
 
                             <div class="form_group">
-                                <label class="fieldlabels">Chargement de certifecat de salaire : *</label> 
-                                <input type="file" 
-                                    name="pic" 
-                                    accept="image/*" 
-                                    (change)="onFileChange($event,'salaryCertificate')" 
-                                    
+                                <label class="fieldlabels">Chargement de certifecat de salaire : *</label>
+                                <input type="file"
+                                    name="pic"
+                                    accept="image/*"
+                                    (change)="onFileChange($event,'salaryCertificate')"
+
                                 >
-                                <!-- <div class="invalid__feedback" 
+                                <!-- <div class="invalid__feedback"
                                     *ngIf="isDocumentControlHasError('salaryCertificat','required')">
-                                    Ce fichier est obligatoire 
+                                    Ce fichier est obligatoire
                                 </div> -->
                             </div>
 
                             <div class="form_group">
-                                <label class="fieldlabels">Chargement de certificat de résidence OU EAU/ELEC : *</label> 
-                                <input type="file" 
-                                    name="pic" 
-                                    accept="image/*" 
-                                    (change)="onFileChange($event,'certificateResWaterElec')" 
-                                    
+                                <label class="fieldlabels">Chargement de certificat de résidence OU EAU/ELEC : *</label>
+                                <input type="file"
+                                    name="pic"
+                                    accept="image/*"
+                                    (change)="onFileChange($event,'certificateResWaterElec')"
+
                                 >
-                                <!-- <div class="invalid__feedback" 
+                                <!-- <div class="invalid__feedback"
                                     *ngIf="isDocumentControlHasError('certificateResWaterElec','required')">
-                                    Ce fichier est obligatoire 
+                                    Ce fichier est obligatoire
                                 </div> -->
                             </div>
 
                             <div class="form_group">
-                                <label class="fieldlabels">Chargement de certifecat de travaille : *</label> 
-                                <input type="file" 
-                                    name="pic" 
-                                    accept="image/*" 
-                                    (change)="onFileChange($event,'jobCertificate')" 
+                                <label class="fieldlabels">Chargement de certifecat de travaille : *</label>
+                                <input type="file"
+                                    name="pic"
+                                    accept="image/*"
+                                    (change)="onFileChange($event,'jobCertificate')"
                                 >
-                                <!-- <div class="invalid__feedback" 
+                                <!-- <div class="invalid__feedback"
                                     *ngIf="isDocumentControlHasError('jobCertificate','required')">
-                                    Ce fichier est obligatoire 
+                                    Ce fichier est obligatoire
                                 </div> -->
-                            </div> 
+                            </div>
                         </div>
                         <!-- Buttons -->
-                        <input type="button" 
+                        <input type="button"
                             name="next"
-                            class="next action-button" 
-                            value="Suivante"  
-                        /> 
-                        <input type="button" 
-                            name="previous" 
-                            class="previous action-button-previous" 
-                            value="Précédente" 
+                            class="next action-button"
+                            value="Suivante"
+                        />
+                        <input type="button"
+                            name="previous"
+                            class="previous action-button-previous"
+                            value="Précédente"
                         />
                     </form>
                     <form>
@@ -383,18 +387,30 @@
                                 </div>
                             </div> <br><br>
                             <div class="">
-                                <h4>Les information personnelle :</h4>
-                                <strong>Nom : </strong><label class="col-form-label">{{clientForm.value.lastName}}</label><br/><br/>
-                                <strong>Prénom : </strong><label class="col-form-label">{{clientForm.value.firstName}}</label><br/><br/>
-                                <strong>CIN : </strong><label class="col-form-label"></label><br/><br/>
-                                <strong>Email : </strong><label class="col-form-label"></label><br/><br/>
-                                <strong>Age : </strong><label class="col-form-label"></label><br/><br/>
-                                <strong>Phone : </strong><label class="col-form-label"></label><br/><br/>
+                                <h4 class="mb-3 text-primary">Les information personnelle :</h4>
+                                <h6 class="mb-3 text-success"><u>informations personnelle :</u></h6>
+                                <div class="ml-3">
+                                  <strong>Nom : </strong><label class="col-form-label">{{clientForm.value.lastName}}</label><br/><br/>
+                                  <strong>Prénom : </strong><label class="col-form-label">{{clientForm.value.firstName}}</label><br/><br/>
+                                  <strong>CIN : </strong><label class="col-form-label">{{clientForm.value.CIN_Number}}</label><br/><br/>
+                                  <strong>Email : </strong><label class="col-form-label">{{clientForm.value.email}}</label><br/><br/>
+                                  <strong>Age : </strong><label class="col-form-label">{{clientForm.value.age}}</label><br/><br/>
+                                  <strong>Phone : </strong><label class="col-form-label">{{clientForm.value.phone}}</label><br/><br/>
+                                  <strong>Salaire : </strong><label class="col-form-label">{{clientForm.value.salary}} DH</label><br/><br/>
+                                  <strong>Adresse : </strong><label class="col-form-label">{{clientForm.value.address}}</label><br/><br/>
+                                  <strong>Fonction : </strong><label class="col-form-label">{{clientForm.value.job}}</label><br/><br/>
+                                </div>
+                                <hr>
+                                <h6 class="my-3 text-success"><u>informations du crédit :</u></h6>
+                                <div class="ml-3">
+                                  <strong>Montant : </strong><label class="col-form-label">{{creditForm.value.amount}} DH</label><br/><br/>
+                                  <strong>Montant à payer / Mois : </strong><label class="col-form-label">{{creditForm.value.monthly}} DH</label><br/><br/>
+                                </div>
                             </div>
                             <!-- <h2 class="purple-text text-center"><strong>Succès !</strong></h2> <br>
                             <div class="row justify-content-center">
-                                <div class="col-3"> 
-                                    <img src="https://i.imgur.com/GwStPmg.png" class="fit-image"> 
+                                <div class="col-3">
+                                    <img src="https://i.imgur.com/GwStPmg.png" class="fit-image">
                                 </div>
                             </div> <br><br>
                             <div class="row justify-content-center">
@@ -403,15 +419,15 @@
                                 </div>
                             </div> -->
                         </div>
-                        <input type="button" 
-                            class="action-button" 
-                            value="Valider"  
+                        <input type="button"
+                            class="action-button"
+                            value="Valider"
                             (click)="submit()"
-                        /> 
-                        <input type="button" 
-                            name="previous" 
-                            class="previous action-button-previous" 
-                            value="Précédente" 
+                        />
+                        <input type="button"
+                            name="previous"
+                            class="previous action-button-previous"
+                            value="Précédente"
                         />
                     </form>
                 </div>
