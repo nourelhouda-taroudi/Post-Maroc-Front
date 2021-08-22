@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { jsPDF } from 'jspdf'
 import html2canvas from 'html2canvas';
 import { ActivatedRoute } from '@angular/router';
+import { Credit } from 'src/app/core/_services/_models/credit.model';
+import { DocumentService } from 'src/app/core/_services/document/document.service';
 
 @Component({
   selector: 'app-document-validation',
@@ -11,39 +13,50 @@ import { ActivatedRoute } from '@angular/router';
 export class DocumentValidationComponent implements OnInit {
 
   constructor(
-    private route : ActivatedRoute
+    private route           : ActivatedRoute,
+    private documentService : DocumentService
   ) { }
   name : string = "Haitham";
-  CIN_number : number = 0;
+  CIN_Number : number = 0;
   firstName : string = "";
   lastName : string = "";
   duration : number = 0;
   monthly : number = 0;
   amount : number =0;
+  dateAujourdHui : Date = new Date();
+  credit : Credit | any ;
+  idCredit : number |any;
+  generatedFile:string | any;
+  pdf : any;
+  signature : boolean = false;
   ngOnInit(): void {
-    console.log(this.route.snapshot.paramMap.get('CIN'),this.route.snapshot.paramMap.get('idCredit'));
+    this.idCredit = this.route.snapshot.paramMap.get('idCredit');
+    // Genrate the pdf file base 64
+    this.exportAsPDFOrGenerate('MyDIv',false);
   }
-  exportAsPDF(div_id : string)
+  exportAsPDFOrGenerate(div_id : string , saveIt:boolean)
   {
     var w = document.getElementById(div_id) as HTMLCanvasElement;
     var h = document.getElementById(div_id) as HTMLCanvasElement ;
     let data = document.getElementById(div_id) as HTMLCanvasElement;  
-    html2canvas(data).then(canvas => {
-      const contentDataURL = canvas.toDataURL('image/png')  
-      //let pdf = new jsPDF('l', 'cm', 'a4'); //Generates PDF in landscape mode
-      // var pdf = new jsPDF('p', 'pt', [canvas.width, canvas.height]);
-      // var pdf = new jsPDF('p', 'mm');
-      // pdf.addImage(contentDataURL, 'PNG', 10, 10);
-      //let pdf = new jsPDF('p', 'cm', 'a4'); //Generates PDF in portrait mode
-      //pdf.addImage(contentDataURL, 'PNG', 0,0,canvas.width, canvas.height);  
-      // pdf.save('Filename.pdf');   
+    html2canvas(data).then(canvas => {   
       var img = canvas.toDataURL("image/jpeg", 1);
       var doc = new jsPDF('l', 'px', [w.offsetWidth, h.offsetHeight]);
       doc.addImage(img, 'JPEG', 0, 0,w.offsetWidth, h.offsetHeight);
-      doc.save('sample-file.pdf');
-      //var file = doc.output('datauri');
-      //console.log(file);
+      saveIt?doc.save('Credit-N°'+this.idCredit+'.pdf'):this.generatedFile = doc.output('datauristring');
     }); 
+  }
+
+  signer(){
+    this.documentService.signer(this.idCredit,this.generatedFile)
+    .subscribe(res=>{
+      this.signature = true;
+      // Export pdf
+      setTimeout(function(){}, 4000);
+      this.exportAsPDFOrGenerate('MyDIv',true);
+    },err=>{
+      console.log(err);
+    })
   }
 
 }
