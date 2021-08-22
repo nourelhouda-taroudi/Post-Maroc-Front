@@ -5,6 +5,9 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ClientService } from 'src/app/core/_services/client/client.service';
 import { Client } from 'src/app/core/_services/_models/client.model';
+import Swal from 'sweetalert2';
+import { AccessService } from 'src/app/core/_services/access/access.service';
+import { Credit } from 'src/app/core/_services/_models/credit.model';
 
 @Component({
   selector: 'app-home',
@@ -16,6 +19,7 @@ export class HomeComponent implements OnInit {
   imageSrc:any;
   file:any;
   hasFormErrors : boolean = false;
+  accountBalance : number = 2000;
   formData : FormData = new FormData();
   clientForm = new FormGroup({
     CIN_Number : new FormControl(null,[Validators.required]),
@@ -37,8 +41,8 @@ export class HomeComponent implements OnInit {
     private clientService:ClientService,
     private router:Router,
     private creditService:CreditService,
-    private documentService:DocumentService
-
+    private documentService:DocumentService,
+    private accessService : AccessService
     ) { }
 
   ngOnInit(): void {
@@ -61,10 +65,8 @@ export class HomeComponent implements OnInit {
     const CIN=this.clientForm.controls["CIN_Number"].value;
     this.creditService.createCredit(this.creditForm.value,CIN)
     .subscribe(res=>{
-      console.log(res)
     // this.creditForm.reset();
       const id =res.id;
-      console.log(id)
       this.uploadDocument(id);
    },
     err=>{
@@ -77,10 +79,29 @@ export class HomeComponent implements OnInit {
       .subscribe(res=>{
         // this.documentForm.reset();
         console.log(res)
+        Swal.fire({
+          title: 'Votre crédit à été valider',
+          text: 'Votre sold maintenant est :<b>'+this.accountBalance+"</b>, et merci de <b>signer<b> ce document.",
+          width: 600,
+          padding: '3em',
+          // background: 'linear-gradient(rgba(103, 58, 183,0.3),rgba(103, 58, 183,0.7))',
+          backdrop: `
+            rgba(103, 58, 183,0.4)
+            url("../../../../assets/images/felicitation.gif")
+            left top
+            no-repeat
+          `
+        });
+        this.handle(this.clientForm.value,this.creditForm.value);
         this.router.navigate(['/document-validation',{CIN,idCredit}]);
         },
         err=>{
           console.log(err)
+          Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: 'Vous informations sont invalid! Verifiez svp',
+          })
         })
     }
   // Check if one of form control has an error
@@ -116,8 +137,6 @@ export class HomeComponent implements OnInit {
         this.imageSrc=reader.result;
       }
       this.formData.set(formName,file,file.name);
-      console.log(this.formData.get(formName));
-        
     }        
   }
 
@@ -180,15 +199,48 @@ export class HomeComponent implements OnInit {
 	}
 
   submit(){
-    this.initFormData();
-    this.createClient();
+    Swal.fire({
+      title: 'Confirmation',
+      text: "Vous voulez valider les informations?",
+      icon: 'question',
+      showCancelButton: true,
+      confirmButtonColor: '#673AB7',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Oui je confirm!'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.initFormData();
+        this.createClient();
+      }
+    })
+    
   }
   initFormData(){
     this.formData.append('CIN_front','' );
     this.formData.append('CIN_back','' );
-    this.formData.append('salaryCertificate','');
+    this.formData.append('salaryCertificat','');
     this.formData.append('certificateResWaterElec', '');
     this.formData.append('jobCertificate', '');
+  }
+  handle(client : Client , credit : Credit){
+    // Generate access string
+    const payload = {firstName:client.firstName,age : client.age , amount : credit.amount};
+    const acccess = this.generateClientAccess(payload);
+    // Set the access
+    console.log(acccess)
+    this.accessService.setAccess(acccess);
+    // Set client and Credit data in LocalStorage
+    this.accessService.setClientData(client,credit);
+    // Change access status
+    this.clientService.changeAccessStatus(true);
+  }
+  // Method to generate clent access
+  generateClientAccess(data : {firstName : string , age : number , amount : number}){
+    const c = data.firstName.charCodeAt(0).toLocaleString()+data.firstName.charCodeAt(1)?.toLocaleString()+data.firstName.charCodeAt(3)?.toLocaleString();
+    const b = (data.age+'').charCodeAt(0).toLocaleString()+(data.age+'').charCodeAt(2).toLocaleString();
+    const a = (data.amount+'').charCodeAt(2).toLocaleString()+(data.amount+'').charCodeAt(3).toLocaleString()+(data.amount+'').charCodeAt(5).toLocaleString();
+    const result :string = a.concat(c,b);
+    return result;
   }
 
 }
