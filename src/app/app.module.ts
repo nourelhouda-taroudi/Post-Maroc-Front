@@ -27,7 +27,6 @@ import { NavbarComponent } from './views/partials/navbar/navbar.component';
     HttpClientModule,
 	  ReactiveFormsModule,
     FormsModule
-	
   ],
   providers: [
     ClientService,

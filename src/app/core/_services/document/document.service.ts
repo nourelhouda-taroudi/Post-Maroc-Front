@@ -20,4 +20,7 @@ export class DocumentService {
     headers.append('Accept', 'application/json');
     return this.http.post(`${API_DOC}/${CIN}/uploadDocument`,payload,{headers: headers});
   }
+  signer(idCredit:number,pdf:string):Observable<any>{
+    return this.http.put(`${API_DOC}/${idCredit}/sign`,pdf);
+  }
 }
