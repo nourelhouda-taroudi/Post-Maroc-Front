@@ -12,6 +12,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { HomeComponent } from './views/home/home.component';
 import { DocumentValidationComponent } from './views/document-validation/document-validation.component';
 import { NavbarComponent } from './views/partials/navbar/navbar.component';
+import { PagenotfoundComponent } from './pagenotfound/pagenotfound.component';
 
 
 @NgModule({
@@ -20,6 +21,7 @@ import { NavbarComponent } from './views/partials/navbar/navbar.component';
     HomeComponent,
     DocumentValidationComponent,
     NavbarComponent,
+    PagenotfoundComponent,
   ],
   imports: [
     BrowserModule,

@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { DocumentValidationComponent } from './views/document-validation/document-validation.component';
 import { AccessGuard } from './core/_guards/access.guard';
+import { PagenotfoundComponent } from './pagenotfound/pagenotfound.component';
 
 
 const routes: Routes = [
@@ -17,7 +18,7 @@ const routes: Routes = [
   },
   {
     path:'**',
-    redirectTo :'/' // TODO : Create 404 error page
+    component:PagenotfoundComponent // TODO : Create 404 error page
   }
 
 ];
