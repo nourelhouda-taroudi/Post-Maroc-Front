@@ -1,12 +1,11 @@
 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
 
-<div class="page-content container">
+<div class="page-content container" *ngIf="client!=null && credit!=null">
     <div class="page-header text-blue-d2">
         <h1 class="page-title text-secondary-d1">
-            Invoice
+            Crédit
             <small class="page-info">
-                <i class="fa fa-angle-double-right text-80"></i>
-                ID: #111-222
+                ID: #{{credit.idCredit}}
             </small>
         </h1>
 
@@ -26,10 +25,10 @@
                 <div class="row">
                     <div class="col-12">
                         <div class="text-center text-150 mt-4" >
-                            <img src="../../../assets/images/logo.png" 
-                                height="120px" 
-                                width="100px" 
-                                alt="Post Maroc" 
+                            <img src="../../../assets/images/logo.png"
+                                height="120px"
+                                width="100px"
+                                alt="Post Maroc"
                                 class="text-success-m2 mr-1">
                         </div>
                     </div>
@@ -40,14 +39,10 @@
                 <h1 class="page-title text-secondary-d1 mb-2">
                     Crédit
                     <small class="page-info">
-                        ID: #111-222
+                        ID: #{{credit.idCredit}}
                     </small>
                 </h1>
-                <p class="my-4">je suis {{firstName}}{{lastName}},le porteur de la carte d'identité {{CIN_Number}} ,j'emprunt de la banque Poste Maroc le jour {{dateAujourdHui}}, un montant de {{amount}}  à condition de payer chaque mois le montant {{monthly}} durant {{duration}} mois.</p>
-                <div class="mt-5 float-right">
-                    <h4 *ngIf="signature">Signé</h4>
-                    <h4 *ngIf="!signature">Non signé</h4>
-                </div>
+                <p class="my-4">Je suis {{client.firstName}}{{client.lastName}}, le porteur de la carte d'identité {{client.CIN_Number}} ,j'emprunt de la banque Poste Maroc le jour {{dateAujourdHui | date :'dd/MM/yyyy'}}, un montant de {{credit.amount}} DHs  à condition de payer chaque mois le montant {{credit.monthly}} DHs durant {{credit.duration | monthsToYears}}.</p>
                 <hr/>
                 <div class="justify-content-between d-flex mb-3">
                     <span class="text-secondary-d1 text-105">Post Maroc, la banque qui ouvre les ports à tous.</span>
