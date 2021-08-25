@@ -20,7 +20,7 @@ export class HomeComponent implements OnInit {
   imageSrc:any;
   file:any;
   hasFormErrors : boolean = false;
-  accountBalance : number = 2000;
+  accountBalance : number = 0;
   formData : FormData = new FormData();
   clientForm = new FormGroup({
     CIN_Number : new FormControl(null,[Validators.required]),
@@ -79,22 +79,7 @@ export class HomeComponent implements OnInit {
     this.documentService.uploadDocument(this.formData, CIN)
       .subscribe(res=>{
         // this.documentForm.reset();
-        console.log(res)
-        Swal.fire({
-          title: 'Votre crédit à été valider',
-          text: 'Votre sold maintenant est :<b>'+this.accountBalance+"</b>, et merci de <b>signer<b> ce document.",
-          width: 600,
-          padding: '3em',
-          // background: 'linear-gradient(rgba(103, 58, 183,0.3),rgba(103, 58, 183,0.7))',
-          backdrop: `
-            rgba(103, 58, 183,0.4)
-            url("../../../../assets/images/felicitation.gif")
-            left top
-            no-repeat
-          `
-        });
-        this.handle(this.clientForm.value,this.creditForm.value);
-        this.router.navigate(['/document-validation',{CIN,idCredit}]);
+        this.getAccountBalance(CIN,idCredit);
         },
         err=>{
           console.log(err)
@@ -251,4 +236,28 @@ export class HomeComponent implements OnInit {
     return result;
   }
 
+  private getAccountBalance(CIN : string,idCredit : number) {
+    this.clientService.getAccountBalance(CIN)
+      .subscribe((res:number)=>{
+        this.accountBalance = res;
+        console.log(this.accountBalance);
+        Swal.fire({
+          title: 'Votre crédit à été valider',
+          text: 'Votre sold maintenant est :'+this.accountBalance+", et merci de signer ce document.",
+          width: 600,
+          padding: '3em',
+          // background: 'linear-gradient(rgba(103, 58, 183,0.3),rgba(103, 58, 183,0.7))',
+          backdrop: `
+            rgba(103, 58, 183,0.4)
+            url("../../../../assets/images/felicitation.gif")
+            left top
+            no-repeat
+          `
+        });
+        this.handle(this.clientForm.value,this.creditForm.value);
+        this.router.navigate(['/document-validation',{CIN,idCredit}]);
+      },err=>{
+        console.log(err);
+      })
+  }
 }
