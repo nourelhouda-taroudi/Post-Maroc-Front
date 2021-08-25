@@ -13,6 +13,7 @@ import { HomeComponent } from './views/home/home.component';
 import { DocumentValidationComponent } from './views/document-validation/document-validation.component';
 import { NavbarComponent } from './views/partials/navbar/navbar.component';
 import { PagenotfoundComponent } from './pagenotfound/pagenotfound.component';
+import { MonthsToYearsPipe } from './core/_pipes/months-to-years.pipe';
 
 
 @NgModule({
@@ -22,6 +23,7 @@ import { PagenotfoundComponent } from './pagenotfound/pagenotfound.component';
     DocumentValidationComponent,
     NavbarComponent,
     PagenotfoundComponent,
+    MonthsToYearsPipe,
   ],
   imports: [
     BrowserModule,
