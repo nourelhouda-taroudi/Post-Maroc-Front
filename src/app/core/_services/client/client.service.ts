@@ -24,11 +24,10 @@ export class ClientService {
   createClient(client:Client):Observable<any>{
      return this.http.post(API_CLIENT+'/createClient',client);
   }
-  getAccountBalance(){
-    this.http.get(environment.API_URL+'/AE269199/getAccountBalance').subscribe(res=>{
-      console.log(res);
-    },err=>{
-      console.log(err)
-    });
+  getAccountBalance(CIN : string):Observable<number>{
+    return this.http.get<number>(API_CLIENT+'/'+CIN+'/getAccountBalance');
+  }
+  getClientByCIN(CIN : string):Observable<Client>{
+    return this.http.get<Client>(API_CLIENT+'/'+CIN+'/getClient');
   }
 }
