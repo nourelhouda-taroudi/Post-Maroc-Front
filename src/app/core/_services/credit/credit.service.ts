@@ -18,4 +18,7 @@ export class CreditService {
   createCredit(credit:Credit,CIN:string):Observable<any>{
     return this.http.post(API_CREDIT+'/applyForCredit/'+CIN,credit);
  }
+ getCreditById(idCredit : number):Observable<Credit>{
+    return this.http.get<Credit>(API_CREDIT+'/'+idCredit+'/getCredit');
+ }
 }
