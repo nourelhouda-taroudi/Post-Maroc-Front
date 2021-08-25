@@ -26,10 +26,10 @@ export class AccessService {
     localStorage.removeItem('access');
   }
   setClientData(client : Client , credit : Credit){
-    localStorage.setItem('firstName',client.firstName); 
+    localStorage.setItem('firstName',client.firstName);
     localStorage.setItem('lastName',client.lastName);
     localStorage.setItem('CIN',client.CIN_Number);
-    localStorage.setItem('age',client.age+"");    
+    localStorage.setItem('age',client.age+"");
     localStorage.setItem('amount',credit.amount+"");
   }
   getClientFirstName(){
@@ -40,6 +40,9 @@ export class AccessService {
   }
   getClientCreditAmount(){
     return localStorage.getItem('amount');
+  }
+  getCINClient(){
+    return localStorage.getItem('CIN');
   }
   check(access : string){
     const firstName : any = this.getClientFirstName();
