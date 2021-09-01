@@ -1,27 +1,78 @@
-# PostMaroc
+<h1 align="center">Post Maroc Crédit</h1>
+<h3 align="center">Application web avec Angular & Laravel</h3></br>
+<p align="center"><img alt="logo" src="src/assets/images/logo.png" href="" width="50" height="60"></p>
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 12.2.1.
+#### Contenu
+* [Introdution](#introduction)
+* [Conditions](#conditions)
+* [Usage](#usage)
+* [Interfaces](#interfaces)
 
-## Development server
+## Introduction
+Aujourd’hui la plupart des gens préfère de faire un crédit par un site web sans aller au banque, pour gagner le temps, mais avec sécurité des informations. Le but est de réaliser une application responsive qui va rendre ce processus plus léger et facile aux clients, elle permet de :    
+1. Traiter les informations du client.     
+1. Vérifier les informations de client avec les conditions de banque.     
+1. Traiter les documents par AI.     
+1. Signer le contrat de credit.     
+1. Ajouter le montant au solde de client. 
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+## Conditions 
+- Angular >= 12
+- PHP  >= 7.2.5
+- Laravel >= 7.x
 
-## Code scaffolding
+## Usage
+### Usage est simple, via la commande :
+  - Front end :
+  ```GIT
+  git clone https://github.com/nourelhouda-taroudi/Post-Maroc-Front.git
+    
+  ```
+  - Back end :
+  ```GIT
+  git clone https://github.com/nourelhouda-taroudi/Post-Maroc-Api.git
+    
+  ```
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+## Interfaces : 
+* ### Accueil
+<p align="left">
+  <img alt="" src="src/assets/images/Accueil-1.png" width="617" height="352">
+</p>
+<p align="left">
+  <img alt="" src="src/assets/images/Accueil-2.png" width="617" height="352">
+</p>
 
-## Build
+* ### Compte
+<p align="left">
+  <img alt="" src="src/assets/images/Compte.png" width="617" height="352">
+</p>
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+* ### Crédit
+<p align="left">
+  <img alt="" src="src/assets/images/Credit.png" width="617" height="352">
+</p>
 
-## Running unit tests
+* ### Document
+<p align="left">
+  <img alt="" src="src/assets/images/upload.png" width="617" height="352">
+</p>
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+* ### Confirmation
+<p align="left">
+  <img alt="" src="src/assets/images/Confirmation.png" width="617" height="352">
+</p>
+<p align="left">
+  <img alt="" src="src/assets/images/Confirmation-2.png" width="617" height="352">
+</p>
+<p align="left">
+  <img alt="" src="src/assets/images/done.png" width="617" height="352">
+</p>
 
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+* ### Signature
+<p align="left">
+  <img alt="" src="src/assets/images/document.png" width="617" height="352">
+</p>
+<p align="left">
+  <img alt="" src="src/assets/images/download-pdf.png" width="617" height="352">
+</p>
